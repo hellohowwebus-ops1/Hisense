@@ -47,7 +47,7 @@ export const AboutCompany: React.FC<AboutCompanyProps> = ({ onOpenRfq }) => {
           {/* Left: Cleanroom Facility Hero Image with Hisense Branding */}
           <div className="lg:col-span-6 rounded-3xl overflow-hidden bg-slate-100 border border-slate-200 shadow-xl relative min-h-[400px] group">
             <img
-              src="/src/assets/images/hisense_lab_cleanroom_post_1792385753427.jpg"
+              src="/assets/images/hisense_lab_cleanroom_post_1792385753427.jpg"
               alt="Hisense International Cleanroom Manufacturing & Inspection"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               loading="lazy"

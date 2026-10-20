@@ -115,7 +115,7 @@ export const PresentationMode: React.FC<PresentationModeProps> = ({
           </div>
           <div className="rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-md">
             <img 
-              src="/src/assets/images/ivf_embryo_catheter_macro_1792383675323.jpg" 
+              src="/assets/images/ivf_embryo_catheter_macro_1792383675323.jpg" 
               alt="Hisense EchoFlex IVF Catheter" 
               className="w-full h-64 object-cover"
             />
@@ -164,7 +164,7 @@ export const PresentationMode: React.FC<PresentationModeProps> = ({
           </div>
           <div className="rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-md">
             <img 
-              src="/src/assets/images/hisense_autoclave_clean_white_1792385688682.jpg" 
+              src="/assets/images/hisense_autoclave_clean_white_1792385688682.jpg" 
               alt="Hisense Class-B Autoclave" 
               className="w-full h-64 object-cover"
             />
