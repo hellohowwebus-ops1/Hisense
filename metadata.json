@@ -1,0 +1,6 @@
+{
+  "name": "Hisense International | Medical & IVF Equipment 3D Showcase",
+  "description": "Manufacturer, supplier and distributor of IVF, ART, contraceptive devices, dental instruments, CSSD, and advanced medical equipment with interactive 3D demos and marketing presentations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
