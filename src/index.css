@@ -137,3 +137,39 @@
 .animate-marquee-rtl:hover {
   animation-play-state: paused;
 }
+
+/* =========================================================================
+   MEDIA PROTECTION & ANTI-DOWNLOAD / ANTI-SCREENSHOT STYLES
+   ========================================================================= */
+
+/* Prevent image dragging, ghost-drag previews, and callout menus */
+img, video, canvas, [data-protected="true"] {
+  -webkit-user-drag: none !important;
+  -khtml-user-drag: none !important;
+  -moz-user-drag: none !important;
+  -o-user-drag: none !important;
+  user-drag: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -ms-user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
+
+/* Invisible click & drag interceptor shield overlay */
+.media-protection-shield {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: transparent;
+  pointer-events: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Print Protection: Blank out entire page if user tries Ctrl+P / Save to PDF */
+@media print {
+  html, body {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}

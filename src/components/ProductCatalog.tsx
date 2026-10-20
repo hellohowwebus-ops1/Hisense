@@ -110,9 +110,13 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 select-none pointer-events-none"
                     loading="lazy"
+                    draggable={false}
+                    onContextMenu={(e) => e.preventDefault()}
                   />
+                  {/* Invisible transparent DRM shield */}
+                  <div className="media-protection-shield" aria-hidden="true" />
                   
                   {/* Top Subcategory and Stock Badge */}
                   <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between pointer-events-none">

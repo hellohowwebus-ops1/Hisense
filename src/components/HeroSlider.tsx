@@ -94,7 +94,9 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               <img
                 src={slide.backgroundImage}
                 alt={slide.title}
-                className="w-full h-full object-cover object-center filter brightness-[0.98] contrast-[1.02]"
+                className="w-full h-full object-cover object-center filter brightness-[0.98] contrast-[1.02] select-none pointer-events-none"
+                draggable={false}
+                onContextMenu={(e) => e.preventDefault()}
               />
             </div>
           );
@@ -234,13 +236,16 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               className="relative w-full max-w-[460px] aspect-square rounded-3xl overflow-hidden bg-white/90 p-4 border border-white/90 shadow-2xl backdrop-blur-md animate-float transition-all duration-500"
             >
               
-              {/* Product Visual of the Active Slide */}
+              {/* Product Visual of the Active Slide with DRM Protection */}
               <img
                 src={activeSlide.image}
                 alt={activeSlide.title}
-                className="w-full h-full object-cover rounded-2xl filter drop-shadow-[0_15px_35px_rgba(2,132,199,0.15)] transition-transform duration-700 hover:scale-105"
+                className="w-full h-full object-cover rounded-2xl filter drop-shadow-[0_15px_35px_rgba(2,132,199,0.15)] transition-transform duration-700 hover:scale-105 select-none pointer-events-none"
                 loading="eager"
+                draggable={false}
+                onContextMenu={(e) => e.preventDefault()}
               />
+              <div className="media-protection-shield rounded-2xl" aria-hidden="true" />
 
               {/* Real-time Interactive Video Demo Callout */}
               <button

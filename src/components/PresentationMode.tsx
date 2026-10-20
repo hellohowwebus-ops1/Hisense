@@ -113,12 +113,15 @@ export const PresentationMode: React.FC<PresentationModeProps> = ({
               <ChevronRight className="w-4 h-4 text-cyan-400" />
             </button>
           </div>
-          <div className="rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-md">
+          <div className="rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-md relative">
             <img 
               src="/assets/images/ivf_embryo_catheter_macro_1792383675323.jpg" 
               alt="Hisense EchoFlex IVF Catheter" 
-              className="w-full h-64 object-cover"
+              className="w-full h-64 object-cover select-none pointer-events-none"
+              draggable={false}
+              onContextMenu={(e) => e.preventDefault()}
             />
+            <div className="media-protection-shield" aria-hidden="true" />
             <div className="p-3.5 bg-slate-50 text-xs text-slate-600 font-mono flex justify-between border-t border-slate-100">
               <span className="font-semibold">MEA Tested: &gt; 80% Blastocyst</span>
               <span className="text-emerald-700 font-bold">Class 10,000 Cleanroom</span>
@@ -162,12 +165,15 @@ export const PresentationMode: React.FC<PresentationModeProps> = ({
               <ChevronRight className="w-4 h-4 text-cyan-400" />
             </button>
           </div>
-          <div className="rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-md">
+          <div className="rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-md relative">
             <img 
               src="/assets/images/hisense_autoclave_clean_white_1792385688682.jpg" 
               alt="Hisense Class-B Autoclave" 
-              className="w-full h-64 object-cover"
+              className="w-full h-64 object-cover select-none pointer-events-none"
+              draggable={false}
+              onContextMenu={(e) => e.preventDefault()}
             />
+            <div className="media-protection-shield" aria-hidden="true" />
             <div className="p-3.5 bg-slate-50 text-xs text-slate-600 font-mono flex justify-between border-t border-slate-100">
               <span className="font-semibold">Chamber: 304 Stainless Steel</span>
               <span className="text-cyan-800 font-bold">Class B Triple Vacuum</span>

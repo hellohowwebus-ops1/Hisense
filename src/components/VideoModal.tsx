@@ -193,22 +193,33 @@ export const VideoModal: React.FC<VideoModalProps> = ({
         </div>
 
         {/* Video Canvas Area */}
-        <div className="relative aspect-video w-full bg-black flex items-center justify-center overflow-hidden">
+        <div 
+          className="relative aspect-video w-full bg-black flex items-center justify-center overflow-hidden select-none"
+          onContextMenu={(e) => e.preventDefault()}
+        >
           <canvas
             ref={canvasRef}
             width={854}
             height={480}
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain pointer-events-none"
           />
 
+          {/* Invisible Click Interceptor */}
+          <div className="media-protection-shield" aria-hidden="true" />
+
           {/* Real-time Telemetry HUD Watermark */}
-          <div className="absolute top-4 left-4 font-mono text-xs text-cyan-400 bg-black/60 px-3 py-1.5 rounded-lg border border-cyan-500/30 backdrop-blur-md">
+          <div className="absolute top-4 left-4 font-mono text-xs text-cyan-400 bg-black/60 px-3 py-1.5 rounded-lg border border-cyan-500/30 backdrop-blur-md pointer-events-none z-10">
             <div>CAM 01 : 4K MACRO LENS</div>
             <div className="text-[10px] text-emerald-400">FRAME SYNC: 60.0 FPS • MEA PASS</div>
           </div>
 
-          <div className="absolute top-4 right-4 font-mono text-xs text-amber-400 bg-black/60 px-3 py-1.5 rounded-lg border border-amber-500/30 backdrop-blur-md">
+          <div className="absolute top-4 right-4 font-mono text-xs text-amber-400 bg-black/60 px-3 py-1.5 rounded-lg border border-amber-500/30 backdrop-blur-md pointer-events-none z-10">
             HISENSE INTL • LAHORE
+          </div>
+
+          {/* Dynamic Copyright Watermark */}
+          <div className="absolute bottom-4 left-4 font-mono text-[9px] text-slate-500/80 bg-black/40 px-2 py-0.5 rounded pointer-events-none z-10">
+            PROTECTED CLINICAL MEDIA • ALL RIGHTS RESERVED
           </div>
 
           {/* Central Play/Pause Watermark when paused */}

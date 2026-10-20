@@ -49,8 +49,11 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover select-none pointer-events-none"
+                  draggable={false}
+                  onContextMenu={(e) => e.preventDefault()}
                 />
+                <div className="media-protection-shield" aria-hidden="true" />
                 {product.badge && (
                   <span className="absolute top-3 left-3 text-[10px] font-black px-2.5 py-1 rounded-full bg-cyan-600 text-white shadow-xs">
                     {product.badge}

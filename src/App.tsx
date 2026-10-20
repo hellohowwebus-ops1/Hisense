@@ -17,6 +17,7 @@ import { VideoModal } from './components/VideoModal';
 import { PresentationMode } from './components/PresentationMode';
 import { RfqBuilderModal } from './components/RfqBuilderModal';
 import { ProductDetailModal } from './components/ProductDetailModal';
+import { MediaProtectionProvider } from './components/MediaProtectionProvider';
 import { Product, RfqItem } from './types';
 import { PRODUCTS, COMPANY_DETAILS } from './data/mockData';
 import { 
@@ -101,7 +102,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 flex flex-col font-sans selection:bg-cyan-600 selection:text-white">
+    <MediaProtectionProvider>
+      <div className="min-h-screen bg-white text-slate-900 flex flex-col font-sans selection:bg-cyan-600 selection:text-white">
       
       {/* Navigation in Crisp White Medical Styling */}
       <Navbar
@@ -258,6 +260,7 @@ export default function App() {
         onAddToRfq={handleAddToRfq}
       />
 
-    </div>
+      </div>
+    </MediaProtectionProvider>
   );
 }
