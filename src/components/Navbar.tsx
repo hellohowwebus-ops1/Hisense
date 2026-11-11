@@ -6,8 +6,6 @@ import {
   X, 
   Phone,
   ChevronDown,
-  Download,
-  FolderArchive,
   ArrowRight,
   Scissors,
   CheckCircle2,
@@ -230,22 +228,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <div>
                       <div className="text-[10px] font-mono font-bold tracking-widest text-cyan-800 uppercase flex items-center gap-1.5">
                         <Scissors className="w-3.5 h-3.5 text-cyan-600" />
-                        HISENSE 4 CORE PRODUCT DIVISIONS
+                        HISENSE 5 CORE PRODUCT DIVISIONS
                       </div>
                       <div className="text-sm font-black text-[#0f2a44] tracking-tight">
-                        Surgical, Dental, Beauty &amp; Barber Salon Instruments
+                        Contraceptive, Surgical, Dental, Beauty &amp; Barber Salon Instruments
                       </div>
                     </div>
-
-                    <a
-                      href="/downloads/Hisense-Complete-Catalog.zip"
-                      download
-                      className="px-3 py-1.5 rounded-lg bg-cyan-50 hover:bg-cyan-100 text-cyan-800 text-[11px] font-bold flex items-center gap-1 border border-cyan-200 transition cursor-pointer"
-                      title="Download Full 4-Category Master Catalog ZIP"
-                    >
-                      <Download className="w-3 h-3 text-cyan-600" />
-                      <span>Master ZIP (2.6MB)</span>
-                    </a>
                   </div>
 
                   {/* 2-Column Categories Grid */}
@@ -274,23 +262,13 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                         <div className="flex items-center justify-between mt-2.5 pt-2 border-t border-slate-200/60 text-[10px]">
                           <span className="font-mono text-slate-400">{cat.badge}</span>
-                          <div className="flex items-center gap-1.5">
-                            <button
-                              onClick={() => handleCategoryClick(cat.id, true)}
-                              className="text-cyan-700 font-bold hover:underline cursor-pointer flex items-center gap-0.5"
-                            >
-                              View <ArrowRight className="w-2.5 h-2.5" />
-                            </button>
-                            <span className="text-slate-300">|</span>
-                            <a
-                              href={cat.zip}
-                              download
-                              className="text-slate-500 hover:text-cyan-700 flex items-center gap-0.5 cursor-pointer font-medium"
-                              title={`Download ${cat.name} ZIP`}
-                            >
-                              <Download className="w-2.5 h-2.5" /> ZIP
-                            </a>
-                          </div>
+                          <button
+                            onClick={() => handleCategoryClick(cat.id, true)}
+                            className="text-cyan-700 font-bold hover:underline cursor-pointer flex items-center gap-0.5"
+                          >
+                            <span>Explore Category</span>
+                            <ArrowRight className="w-2.5 h-2.5" />
+                          </button>
                         </div>
                       </div>
                     ))}
@@ -475,16 +453,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                       </span>
                     </button>
                   ))}
-                  <div className="pt-1.5 mt-1 border-t border-slate-100">
-                    <a
-                      href="/downloads/Hisense-Complete-Catalog.zip"
-                      download
-                      className="text-left py-1.5 px-2.5 rounded-lg bg-slate-100 text-slate-800 font-bold text-[11px] flex items-center gap-1.5"
-                    >
-                      <Download className="w-3.5 h-3.5 text-cyan-600" />
-                      <span>Download Master ZIP (2.6MB)</span>
-                    </a>
-                  </div>
                 </div>
               )}
             </div>

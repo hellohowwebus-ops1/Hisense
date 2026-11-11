@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { PRODUCTS, COMPANY_DETAILS } from '../data/mockData';
+import { PRODUCTS, COMPANY_DETAILS, MIXED_PRODUCTS } from '../data/mockData';
 import { Product } from '../types';
 import { 
   Search, 
-  Download, 
-  FolderArchive, 
   ChevronLeft, 
   ChevronRight, 
   Plus, 
@@ -61,7 +59,9 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
 
   const currentCategoryObj = categories.find((c) => c.id === selectedCategory) || categories[0];
 
-  const filteredProducts = PRODUCTS.filter((p) => {
+  const sourceProducts = selectedCategory === 'all' ? MIXED_PRODUCTS : PRODUCTS;
+
+  const filteredProducts = sourceProducts.filter((p) => {
     const matchesCat = selectedCategory === 'all' || p.category === selectedCategory;
     const matchesSearch =
       p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -129,23 +129,15 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                 Complete Products Catalog
               </h1>
               <p className="text-slate-300 text-xs sm:text-sm mt-2 max-w-2xl font-normal">
-                Explore all 79 precision instruments across 4 specialized divisions. Manufactured to ISO 13485:2016, CE Medical &amp; DRAP standards with nationwide dispatch and export capability.
+                Explore all 97 precision instruments across 5 specialized divisions. Manufactured to ISO 13485:2016, CE Medical &amp; DRAP standards with nationwide dispatch and export capability.
               </p>
             </div>
 
-            {/* Catalog Download Buttons */}
+            {/* Quick RFQ Quote Action */}
             <div className="flex flex-wrap items-center gap-3">
-              <a
-                href={currentCategoryObj.zip}
-                download
-                className="px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-black flex items-center gap-2 transition shadow-sm cursor-pointer"
-              >
-                <Download className="w-4 h-4" />
-                <span>Download {selectedCategory === 'all' ? 'All Catalog' : 'Category'} ZIP</span>
-              </a>
               <button
                 onClick={onOpenRfq}
-                className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition cursor-pointer"
+                className="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-black transition shadow-sm cursor-pointer"
               >
                 View RFQ Quote
               </button>
@@ -255,27 +247,27 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                   {/* Image container */}
                   <div
                     onClick={() => onOpenProductPage(product)}
-                    className="w-full h-64 bg-slate-50 flex items-center justify-center p-5 relative cursor-pointer border-b border-slate-100"
+                    className="w-full h-64 sm:h-72 bg-slate-50 flex items-center justify-center p-2.5 sm:p-3 relative cursor-pointer border-b border-slate-100"
                   >
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-contain group-hover:scale-108 transition-transform duration-500"
                       loading="lazy"
                     />
 
                     {/* Article badge */}
-                    <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+                    <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between pointer-events-none gap-1">
                       <span className="text-[10px] font-mono font-black tracking-wider uppercase text-cyan-950 bg-cyan-100/95 border border-cyan-300 px-2.5 py-0.5 rounded-full shadow-xs">
                         {product.articleNo}
                       </span>
-                      <span className="text-[9px] font-mono font-bold tracking-wider uppercase text-slate-700 bg-white/95 border border-slate-200 px-2 py-0.5 rounded-full shadow-xs">
+                      <span className="text-[9px] font-mono font-bold tracking-wider uppercase text-slate-700 bg-white/95 border border-slate-200 px-2 py-0.5 rounded-full shadow-xs truncate max-w-[125px]">
                         {product.subcategory}
                       </span>
                     </div>
 
                     {/* Hover inspection */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition backdrop-blur-xs bg-slate-950/20">
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition backdrop-blur-2xs bg-slate-950/20">
                       <span className="px-3 py-1.5 rounded-full bg-white text-slate-900 text-xs font-bold flex items-center gap-1 shadow-lg">
                         <ExternalLink className="w-3.5 h-3.5 text-cyan-600" /> Full Specs
                       </span>
@@ -283,43 +275,29 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                   </div>
 
                   {/* Body */}
-                  <div className="p-5">
-                    <div className="text-[11px] font-mono text-cyan-800 mb-1">
-                      <span className="font-bold text-[#0f2a44]">{product.articleNo}</span>
-                      <span className="text-slate-300 mx-1.5">·</span>
-                      <span className="text-slate-500">{product.length || 'Standard'}</span>
-                    </div>
-
+                  <div className="p-4 sm:p-4.5">
                     <h3
                       onClick={() => onOpenProductPage(product)}
-                      className="text-sm font-bold text-[#0f2a44] group-hover:text-cyan-700 transition cursor-pointer line-clamp-2 leading-snug"
+                      className="text-sm sm:text-[15px] font-bold text-[#0f2a44] group-hover:text-cyan-700 transition cursor-pointer line-clamp-2 leading-snug"
                     >
                       {product.name}
                     </h3>
 
-                    <p className="text-xs text-slate-600 mt-1.5 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-slate-500 mt-1.5 line-clamp-2 leading-relaxed">
                       {product.shortDesc}
                     </p>
                   </div>
                 </div>
 
                 {/* Card actions */}
-                <div className="p-5 pt-0 flex items-center gap-2">
+                <div className="p-4 sm:p-5 pt-0">
                   <button
                     onClick={() => onAddToRfq(product)}
-                    className="flex-1 py-2 px-3 rounded-full bg-[#0f2a44] hover:bg-[#153a5c] text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-2xs cursor-pointer"
+                    className="w-full py-2.5 px-4 rounded-full bg-[#0f2a44] hover:bg-[#153a5c] text-white text-xs font-bold flex items-center justify-center gap-2 transition shadow-2xs cursor-pointer"
                   >
                     <Plus className="w-3.5 h-3.5 text-cyan-400" />
                     <span>Add to RFQ</span>
                   </button>
-                  <a
-                    href={product.image}
-                    download={`${product.articleNo}.jpg`}
-                    className="p-2 rounded-full bg-slate-100 hover:bg-cyan-50 text-slate-700 hover:text-cyan-700 border border-slate-200 transition cursor-pointer shrink-0"
-                    title={`Download image of ${product.articleNo}`}
-                  >
-                    <Download className="w-3.5 h-3.5" />
-                  </a>
                 </div>
               </div>
             ))}

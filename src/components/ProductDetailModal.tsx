@@ -1,6 +1,6 @@
 import React from 'react';
 import { Product } from '../types';
-import { X, CheckCircle, ShieldCheck, Sliders, Plus, ExternalLink, PhoneCall, Share2, Download } from 'lucide-react';
+import { X, CheckCircle, ShieldCheck, Sliders, Plus, ExternalLink, PhoneCall, Share2 } from 'lucide-react';
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -173,15 +173,6 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
           </div>
 
           <div className="flex items-center gap-3">
-            <a
-              href={product.image}
-              download={`${product.articleNo}.jpg`}
-              className="px-4 py-2 rounded-full bg-slate-100 hover:bg-cyan-50 text-slate-800 hover:text-cyan-800 text-xs font-bold flex items-center gap-1.5 transition border border-slate-200 cursor-pointer"
-            >
-              <Download className="w-3.5 h-3.5 text-cyan-600" />
-              <span>Download Image</span>
-            </a>
-
             {product.model3dKey && (
               <button
                 onClick={() => {

@@ -74,13 +74,6 @@ export const BrandPostsSection: React.FC<BrandPostsSectionProps> = ({ onNavigate
                       {post.category}
                     </span>
                   </div>
-
-                  {/* Hisense Watermark */}
-                  <div className="absolute bottom-3 right-3">
-                    <span className="text-[9px] font-mono font-black uppercase text-white bg-[#0f2a44]/80 px-2 py-0.5 rounded backdrop-blur-xs">
-                      HISENSE
-                    </span>
-                  </div>
                 </div>
 
                 {/* Content */}
@@ -105,18 +98,6 @@ export const BrandPostsSection: React.FC<BrandPostsSectionProps> = ({ onNavigate
                   <p className="text-xs text-slate-600 mt-2.5 line-clamp-3 leading-relaxed">
                     {post.excerpt}
                   </p>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-1.5 mt-4 pt-3 border-t border-slate-100">
-                    {post.tags.slice(0, 2).map((tag, i) => (
-                      <span
-                        key={i}
-                        className="text-[10px] font-mono text-cyan-800 bg-cyan-50 px-2 py-0.5 rounded-full"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
                 </div>
               </div>
 

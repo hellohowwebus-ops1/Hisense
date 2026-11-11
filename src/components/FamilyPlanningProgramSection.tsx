@@ -9,7 +9,6 @@ import {
   Maximize2, 
   CheckCircle2, 
   ArrowRight, 
-  Download, 
   Plus, 
   Layers, 
   Pill, 
@@ -319,8 +318,8 @@ export const FamilyPlanningProgramSection: React.FC<FamilyPlanningProgramSection
                   onClick={onOpenRfq}
                   className="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-cyan-50 text-[#0f2a44] hover:text-cyan-800 text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer"
                 >
-                  <Download className="w-3.5 h-3.5" />
-                  <span>Download Product Spec Sheet</span>
+                  <FileCheck className="w-3.5 h-3.5 text-cyan-600" />
+                  <span>Request Institutional Spec Sheet &amp; RFQ</span>
                 </button>
               </div>
             </div>

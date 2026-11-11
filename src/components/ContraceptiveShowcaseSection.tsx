@@ -9,7 +9,6 @@ import {
   Maximize2, 
   CheckCircle2, 
   ArrowRight, 
-  Download, 
   Plus, 
   Layers, 
   Activity, 
@@ -656,14 +655,6 @@ export const ContraceptiveShowcaseSection: React.FC<ContraceptiveShowcaseSection
             </div>
 
             <div className="flex flex-wrap items-center gap-3">
-              <a
-                href="/downloads/Hisense-Contraceptive-Range.zip"
-                download="Hisense-Contraceptive-Range.zip"
-                className="px-4 py-2.5 rounded-full bg-pink-50 hover:bg-pink-100 text-[#e6007e] border border-pink-200 text-xs font-black transition flex items-center gap-2 shadow-xs cursor-pointer"
-              >
-                <Download className="w-4 h-4" />
-                <span>Download Range ZIP (18 Items)</span>
-              </a>
               <button
                 onClick={() => {
                   if (onNavigateProducts) {
@@ -738,22 +729,14 @@ export const ContraceptiveShowcaseSection: React.FC<ContraceptiveShowcaseSection
                 </div>
 
                 {/* Footer / RFQ */}
-                <div className="p-4 pt-0 flex items-center gap-2">
+                <div className="p-4 pt-0">
                   <button
                     onClick={() => onAddToRfq && onAddToRfq(product)}
-                    className="flex-1 py-2.5 px-3 rounded-full bg-[#0f2a44] hover:bg-[#e6007e] text-white text-xs font-bold flex items-center justify-center gap-1.5 transition cursor-pointer shadow-xs"
+                    className="w-full py-2.5 px-4 rounded-full bg-[#0f2a44] hover:bg-[#e6007e] text-white text-xs font-bold flex items-center justify-center gap-2 transition cursor-pointer shadow-xs"
                   >
                     <Plus className="w-3.5 h-3.5 text-cyan-300" />
                     <span>Add to RFQ</span>
                   </button>
-                  <a
-                    href={product.image}
-                    download={`${product.articleNo}.jpg`}
-                    className="p-2.5 rounded-full bg-slate-100 hover:bg-pink-50 text-slate-600 hover:text-[#e6007e] border border-slate-200 transition cursor-pointer shrink-0"
-                    title="Download Product Photo"
-                  >
-                    <Download className="w-3.5 h-3.5" />
-                  </a>
                 </div>
               </div>
             ))}

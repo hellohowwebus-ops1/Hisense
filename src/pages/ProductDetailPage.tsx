@@ -4,7 +4,6 @@ import { PRODUCTS, COMPANY_DETAILS } from '../data/mockData';
 import { 
   ArrowLeft, 
   Plus, 
-  Download, 
   CheckCircle, 
   ShieldCheck, 
   FileText, 
@@ -15,7 +14,6 @@ import {
   Check, 
   Sparkles,
   ChevronRight,
-  FolderArchive,
   Layers
 } from 'lucide-react';
 
@@ -86,17 +84,6 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Share2 className="w-3.5 h-3.5" />}
               <span>{copied ? 'Link Copied!' : 'Share Product'}</span>
             </button>
-
-            {product.downloadPath && (
-              <a
-                href={product.downloadPath}
-                download
-                className="px-3 py-1.5 rounded-full bg-cyan-50 hover:bg-cyan-100 text-cyan-800 text-xs font-bold flex items-center gap-1.5 transition border border-cyan-200 cursor-pointer"
-              >
-                <FolderArchive className="w-3.5 h-3.5" />
-                <span>Download Category ZIP</span>
-              </a>
-            )}
           </div>
 
         </div>
@@ -124,7 +111,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                   </span>
                 </div>
 
-                {/* Top Right Actions */}
+                {/* Top Right Fullscreen Zoom */}
                 <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
                   <button
                     onClick={() => setIsZoomed(true)}
@@ -133,14 +120,6 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                   >
                     <Maximize2 className="w-4 h-4" />
                   </button>
-                  <a
-                    href={product.image}
-                    download={`${product.articleNo}.jpg`}
-                    className="p-2 rounded-full bg-white/90 hover:bg-white text-slate-700 hover:text-cyan-700 border border-slate-200 shadow-xs transition cursor-pointer"
-                    title="Download High-Res Image"
-                  >
-                    <Download className="w-4 h-4" />
-                  </a>
                 </div>
 
                 {/* THE IMAGE: object-contain with 100% full view - never cropped */}
@@ -163,13 +142,12 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                   <CheckCircle className="w-4 h-4 text-emerald-600" />
                   <span>Standing Reserve Stock in Lahore</span>
                 </div>
-                <a
-                  href={product.image}
-                  download={`${product.articleNo}.jpg`}
+                <button
+                  onClick={() => setIsZoomed(true)}
                   className="text-cyan-800 hover:text-cyan-950 font-bold flex items-center gap-1 cursor-pointer"
                 >
-                  <Download className="w-3.5 h-3.5" /> Download Full Photo
-                </a>
+                  <Maximize2 className="w-3.5 h-3.5" /> Fullscreen View
+                </button>
               </div>
 
             </div>

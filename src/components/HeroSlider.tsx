@@ -14,7 +14,8 @@ import {
   Award,
   Building2,
   Phone,
-  Clock
+  Clock,
+  Maximize2
 } from 'lucide-react';
 
 interface HeroSliderProps {
@@ -72,12 +73,12 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
 
   return (
     <section 
-      className="relative w-full min-h-screen pt-20 sm:pt-24 pb-14 flex flex-col justify-between overflow-hidden group/hero"
+      className="relative w-full min-h-[92vh] sm:min-h-screen pt-20 sm:pt-24 pb-8 flex flex-col justify-between overflow-hidden group/hero"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* 1. DYNAMIC HIGH-RESOLUTION HISENSE BACKGROUND IMAGE PER SLIDE */}
-      {/* Replaces the plain white background with slide-specific Hisense cleanroom and manufacturing images */}
+      {/* 1. DYNAMIC HIGH-RESOLUTION BACKGROUND PHOTOGRAPHY (NECHY WALI IMAGES) */}
+      {/* Crystal clear presentation of hero1.jpg, hero2.jpg, hero3.jpg with natural lighting & zero heavy washes */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         {HERO_SLIDES.map((slide, index) => {
           const isActive = currentSlideIndex === index;
@@ -93,90 +94,101 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               <img
                 src={slide.backgroundImage}
                 alt={slide.title}
-                className="w-full h-full object-cover object-center filter brightness-[0.98] contrast-[1.02]"
+                className="w-full h-full object-cover object-center filter brightness-[1.0] contrast-[1.03]"
+                loading={index === 0 ? 'eager' : 'lazy'}
               />
             </div>
           );
         })}
-
-        {/* Sophisticated Medical Frosted Glass Overlay Scrim */}
-        {/* Ensures the background image is clearly visible while keeping headline & controls readable */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/94 via-white/75 to-white/20 z-[2] pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-white/60 z-[2] pointer-events-none" />
-        
-        {/* Subtle high-tech cyan ambient tint & grid */}
-        <div className="absolute inset-0 bg-grid-medical-light opacity-20 z-[2] pointer-events-none" />
-        <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[140px] z-[2] pointer-events-none" />
       </div>
 
-      {/* Main Hero Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10 my-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-          
-          {/* Left Column: Glassmorphic Content Card for Maximum Readability */}
-          <div className="lg:col-span-7 flex flex-col justify-center">
-            
-            <div className="bg-white/85 backdrop-blur-md p-6 sm:p-8 lg:p-9 rounded-3xl border border-white/80 shadow-2xl shadow-slate-900/10 relative overflow-hidden">
-              
-              {/* Corner Watermark Badge */}
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl pointer-events-none" />
+      {/* Quick Controls Bar: Active Tag & Pause/Play Control */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-20 mb-3 flex items-center justify-between">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/85 backdrop-blur-md border border-slate-200/80 shadow-xs">
+          <span className="w-2 h-2 rounded-full bg-cyan-600 animate-pulse" />
+          <span className="text-[10px] font-mono tracking-wider uppercase text-cyan-900 font-bold">
+            {activeSlide.categoryTag}
+          </span>
+        </div>
 
-              {/* Top Corporate Tag with Active Facility Tag */}
-              <div className="flex flex-wrap items-center gap-2 mb-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-200/80">
-                  <span className="w-2 h-2 rounded-full bg-cyan-600 animate-pulse" />
-                  <span className="text-[11px] font-mono tracking-wider uppercase text-cyan-800 font-bold">
-                    {activeSlide.categoryTag}
-                  </span>
-                </div>
+        <div className="flex items-center gap-2">
+          {/* Pause / Play Auto-slides */}
+          <button
+            onClick={() => setIsPaused(!isPaused)}
+            className="p-1.5 rounded-full bg-white/85 hover:bg-white text-slate-700 border border-slate-200/80 shadow-xs backdrop-blur-md transition cursor-pointer"
+            title={isPaused ? 'Resume auto-slides' : 'Pause auto-slides'}
+          >
+            {isPaused ? <Play className="w-3.5 h-3.5 text-cyan-600" /> : <Pause className="w-3.5 h-3.5 text-slate-500" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Main Hero Container: Left Content & Compact Right Spotlight Card */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10 my-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          
+          {/* Left Column: Direct Clean Typography with ZERO White Card Background & ZERO White Glow */}
+          <div className="lg:col-span-7 xl:col-span-7 flex flex-col justify-center">
+            
+            <div className="relative max-w-xl transition-all duration-300 py-1">
+
+              {/* Slide Counter & Category Pill */}
+              <div className="flex items-center gap-2 mb-3 text-[10px] font-mono font-bold uppercase tracking-wider">
+                <span className="bg-white/90 backdrop-blur-xs text-cyan-950 px-2.5 py-0.5 rounded-full border border-slate-200/80 shadow-xs">
+                  SLIDE 0{currentSlideIndex + 1} / 0{HERO_SLIDES.length}
+                </span>
+                <span className="text-slate-500">•</span>
+                <span className="bg-white/85 backdrop-blur-xs text-slate-800 px-2.5 py-0.5 rounded-full border border-slate-200/80 shadow-xs truncate">
+                  {activeSlide.shortLabel}
+                </span>
               </div>
 
-              {/* Main Headline (Keyed for smooth crossfade) */}
+              {/* Main Headline with crisp text and NO white glow */}
               <div key={`title-${currentSlideIndex}`} className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-[#0f2a44] tracking-tight leading-[1.14] uppercase min-h-[90px] sm:min-h-[120px] flex items-center">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-[#0a1f33] tracking-tight leading-[1.14] uppercase min-h-[64px] sm:min-h-[76px] flex items-center">
                   <span>
                     {activeSlide.title.includes('IVF') ? (
                       <>
-                        MAKING ACCESS TO <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-teal-600 to-[#0f2a44]">IVF, ART AND MEDICAL</span> EQUIPMENT EASY
+                        MAKING ACCESS TO <span className="text-cyan-700">IVF, ART &amp; MEDICAL</span> TECH EASY
                       </>
                     ) : activeSlide.title.includes('COPPER') ? (
                       <>
-                        WHO-SPEC <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-teal-600 to-[#0f2a44]">COPPER T 380A &amp; CONTRACEPTIVE</span> SOLUTIONS
+                        WHO-SPEC <span className="text-cyan-700">COPPER T 380A &amp; CONTRACEPTIVE</span> SOLUTIONS
                       </>
                     ) : (
                       <>
-                        HOSPITAL <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-teal-600 to-[#0f2a44]">CSSD STERILIZATION &amp; SURGICAL</span> PRECISION
+                        HOSPITAL <span className="text-cyan-700">CSSD STERILIZATION &amp; SURGICAL</span> PRECISION
                       </>
                     )}
                   </span>
                 </h1>
               </div>
 
-              {/* Equalizer Icon + Paragraph */}
+              {/* Sound Wave Equalizer + Clean Paragraph with NO white glow */}
               <div 
                 key={`desc-${currentSlideIndex}`} 
-                className="flex items-start gap-3.5 mt-5 max-w-xl animate-in fade-in duration-300 min-h-[65px]"
+                className="flex items-start gap-3 mt-4 animate-in fade-in duration-300"
               >
-                {/* Animated Sound Wave Equalizer Bars in Hisense Cyan/Teal */}
-                <div className="flex items-center gap-1 shrink-0 pt-1" title="Clinical Precision Signal">
-                  <span className="w-1 bg-cyan-600 rounded-full animate-eq-1" />
-                  <span className="w-1 bg-cyan-500 rounded-full animate-eq-2" />
-                  <span className="w-1 bg-teal-600 rounded-full animate-eq-3" />
-                  <span className="w-1 bg-cyan-600 rounded-full animate-eq-4" />
+                {/* Animated Sound Wave Equalizer */}
+                <div className="flex items-center gap-1 shrink-0 pt-1">
+                  <span className="w-1 bg-cyan-700 rounded-full animate-eq-1" />
+                  <span className="w-1 bg-cyan-600 rounded-full animate-eq-2" />
+                  <span className="w-1 bg-teal-700 rounded-full animate-eq-3" />
+                  <span className="w-1 bg-cyan-700 rounded-full animate-eq-4" />
                 </div>
 
-                {/* Description Paragraph */}
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                {/* Description Paragraph with pure crisp text */}
+                <p className="text-xs sm:text-sm text-[#0f2a44] font-medium leading-relaxed line-clamp-3">
                   {activeSlide.description}
                 </p>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3.5 mt-7">
-                {/* Primary Dark Pill Button: ABOUT US */}
+              <div className="flex flex-wrap items-center gap-3 mt-6">
+                {/* Primary Pill Button: ABOUT US */}
                 <a
                   href="#about"
-                  className="px-7 py-3 rounded-full bg-[#0f2a44] hover:bg-[#173e63] text-white font-black text-xs uppercase tracking-wider shadow-lg shadow-slate-900/10 hover:shadow-slate-900/20 transition-all transform hover:-translate-y-0.5 cursor-pointer"
+                  className="px-7 py-3 rounded-full bg-[#0f2a44] hover:bg-[#173e63] text-white font-black text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer"
                 >
                   ABOUT US
                 </a>
@@ -189,171 +201,143 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                   OUR PRODUCTS
                 </a>
 
-                {/* 3D Demo Trigger matching the active slide's model */}
+                {/* 3D Demo Trigger */}
                 <button
                   onClick={() => onOpen3dModel(activeSlide.modelKey)}
-                  className="px-4.5 py-3 rounded-full text-cyan-800 bg-cyan-50 hover:bg-cyan-100 font-bold text-xs flex items-center gap-2 border border-cyan-300 transition cursor-pointer shadow-xs"
+                  className="px-4.5 py-3 rounded-full text-cyan-900 bg-white hover:bg-cyan-50 font-bold text-xs flex items-center gap-1.5 border border-cyan-300 transition cursor-pointer shadow-xs"
                 >
-                  <Sliders className="w-3.5 h-3.5 text-cyan-600" />
-                  <span>3D Device Lab</span>
-                  <ChevronRight className="w-3.5 h-3.5 text-cyan-600" />
+                  <Sliders className="w-3.5 h-3.5 text-cyan-700" />
+                  <span>3D Lab</span>
+                  <ChevronRight className="w-3.5 h-3.5 text-cyan-700" />
                 </button>
-              </div>
-
-              {/* Direct Contact / Tagline from Card */}
-              <div className="flex flex-wrap items-center gap-3 mt-5 pt-4 border-t border-slate-200/80 text-[11px] font-mono text-slate-500">
-                <span className="text-cyan-700 font-bold">GOVERNMENT CONTRACTOR</span>
-                <span className="text-slate-300">·</span>
-                <span>IMPORTER &amp; EXPORTER</span>
-                <span className="text-slate-300">·</span>
-                <span className="text-amber-600 font-semibold">48-Multan Road Lahore Hub</span>
               </div>
 
             </div>
 
           </div>
 
-          {/* Right Column: High-Resolution Photographic & 3D Visual Card for Active Slide */}
-          <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
-            
-            {/* Outer Orbit Halo */}
-            <div className="absolute w-[440px] h-[440px] rounded-full border border-cyan-500/25 animate-spin [animation-duration:55s] pointer-events-none" />
-            <div className="absolute w-[360px] h-[360px] rounded-full border border-white/60 pointer-events-none" />
-
-            {/* Main Visual Card Container */}
+          {/* Right Column: COMPACT, NON-INTRUSIVE FLOATING PRODUCT SPOTLIGHT */}
+          {/* Sits elegantly to the side without blocking the people/family in the background photo */}
+          <div className="lg:col-span-5 xl:col-span-5 flex flex-col items-center lg:items-end justify-center relative">
             <div 
               key={`visual-${currentSlideIndex}`}
-              className="relative w-full max-w-[500px] aspect-[16/11] sm:aspect-[16/11] rounded-3xl overflow-hidden bg-white/95 p-3.5 sm:p-4 border border-white/90 shadow-2xl backdrop-blur-md animate-float transition-all duration-500"
+              className="relative w-full max-w-[270px] sm:max-w-[310px] aspect-[16/11] rounded-2xl overflow-hidden bg-white/90 p-2.5 sm:p-3 border border-white/90 shadow-xl backdrop-blur-md transition-all duration-500 hover:scale-102 group/spotlight"
             >
-              
-              {/* Product Visual of the Active Slide */}
-              <img
-                src={activeSlide.image}
-                alt={activeSlide.title}
-                className="w-full h-full object-cover rounded-2xl filter drop-shadow-[0_15px_35px_rgba(2,132,199,0.15)] transition-transform duration-700 hover:scale-105"
-                loading="eager"
-              />
+              <div className="relative w-full h-full rounded-xl overflow-hidden bg-slate-100">
+                <img
+                  src={
+                    activeSlide.id === 'slide-contraceptive'
+                      ? '/assets/images/home/contraceptive_kit_pack.jpg'
+                      : activeSlide.image
+                  }
+                  alt={activeSlide.title}
+                  className="w-full h-full object-cover rounded-xl filter drop-shadow-sm transition-transform duration-700 group-hover/spotlight:scale-105"
+                  loading="eager"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    target.src = '/assets/images/home/contraceptive_kit_pack.jpg';
+                  }}
+                />
 
-              {/* Floating Slide Navigation Arrows on Visual Card */}
-              <button
-                onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-                className="absolute left-6 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-white/90 hover:bg-white text-slate-700 hover:text-slate-950 border border-slate-200/90 shadow-md backdrop-blur-md transition cursor-pointer"
-                aria-label="Previous slide"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
-                onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                className="absolute right-6 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-white/90 hover:bg-white text-slate-700 hover:text-slate-950 border border-slate-200/90 shadow-md backdrop-blur-md transition cursor-pointer"
-                aria-label="Next slide"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
+                {/* Spotlight Overlay Badge */}
+                <div className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-[#0f2a44]/85 backdrop-blur-xs text-white text-[9px] font-mono font-bold tracking-wider uppercase">
+                  {activeSlide.badge}
+                </div>
+
+                {/* Navigation arrows directly on spotlight card */}
+                <button
+                  onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 z-10 p-1.5 rounded-full bg-white/85 hover:bg-white text-slate-700 shadow-sm backdrop-blur-xs transition cursor-pointer"
+                  aria-label="Previous slide"
+                >
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); handleNext(); }}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-1.5 rounded-full bg-white/85 hover:bg-white text-slate-700 shadow-sm backdrop-blur-xs transition cursor-pointer"
+                  aria-label="Next slide"
+                >
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+
+              {/* Bottom spec caption */}
+              <div className="flex items-center justify-between mt-2 px-1 text-[10px] font-mono">
+                <span className="text-[#0f2a44] font-bold truncate max-w-[170px]">
+                  {activeSlide.specsPreview[0].label}: {activeSlide.specsPreview[0].val}
+                </span>
+                <button
+                  onClick={() => onOpen3dModel(activeSlide.modelKey)}
+                  className="text-cyan-700 hover:text-cyan-900 font-bold flex items-center gap-0.5 cursor-pointer"
+                >
+                  <span>Inspect 3D</span>
+                  <ChevronRight className="w-3 h-3" />
+                </button>
+              </div>
             </div>
-
           </div>
 
         </div>
       </div>
 
-      {/* 3 AUTO-CHANGING SLIDE IMAGES / THUMBNAIL CARDS BENEATH THE HERO */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-20 mt-10">
-        
-        {/* Strip Header with Auto-play status and controls */}
-        <div className="flex items-center justify-between mb-3 text-xs font-mono">
-          <div className="flex items-center gap-2">
-            <span className="text-cyan-900 font-bold uppercase tracking-wider bg-white/70 backdrop-blur-sm px-2.5 py-1 rounded-lg border border-white/60">
-              HISENSE PRODUCT HERO SLIDES ({HERO_SLIDES.length})
-            </span>
-            <span className="text-slate-600 font-medium hidden sm:inline">• Click any slide or let them auto-change</span>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setIsPaused(!isPaused)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 hover:bg-white border border-slate-200 text-slate-700 hover:text-slate-900 shadow-xs backdrop-blur-md transition cursor-pointer"
-              title={isPaused ? 'Resume auto-slides' : 'Pause auto-slides'}
-            >
-              {isPaused ? <Play className="w-3 h-3 text-cyan-600" /> : <Pause className="w-3 h-3 text-slate-500" />}
-              <span className="text-[10px] font-bold uppercase">{isPaused ? 'Paused' : 'Auto-Playing'}</span>
-            </button>
-
-            <div className="flex items-center gap-1">
-              <button
-                onClick={handlePrev}
-                className="p-1.5 rounded-lg bg-white/90 hover:bg-white border border-slate-200 text-slate-600 hover:text-slate-900 shadow-xs backdrop-blur-md transition cursor-pointer"
-                title="Previous Slide"
-              >
-                <ChevronLeft className="w-3.5 h-3.5" />
-              </button>
-              <button
-                onClick={handleNext}
-                className="p-1.5 rounded-lg bg-white/90 hover:bg-white border border-slate-200 text-slate-600 hover:text-slate-900 shadow-xs backdrop-blur-md transition cursor-pointer"
-                title="Next Slide"
-              >
-                <ChevronRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* 3 Interactive Thumbnail Cards with frosted glass and slide imagery */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
+      {/* 3. SLEEK HORIZONTAL SLIDE CONTROLLER (MINIMAL VERTICAL FOOTPRINT) */}
+      {/* Allows clear view of the lower half of the photograph */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-20 mt-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {HERO_SLIDES.map((slide, index) => {
             const isActive = currentSlideIndex === index;
             return (
               <div
                 key={slide.id}
                 onClick={() => handleSelectSlide(index)}
-                className={`relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 p-3.5 flex items-center gap-3.5 backdrop-blur-md ${
+                className={`relative rounded-xl overflow-hidden cursor-pointer transition-all duration-300 p-2.5 flex items-center gap-3 backdrop-blur-md ${
                   isActive
-                    ? 'bg-white/95 border-2 border-cyan-500 shadow-2xl shadow-cyan-500/20 scale-[1.02]'
-                    : 'bg-white/85 hover:bg-white/95 border border-white/80 hover:border-cyan-300 shadow-md opacity-90 hover:opacity-100'
+                    ? 'bg-white/95 border-2 border-cyan-500 shadow-lg shadow-cyan-500/15 scale-[1.01]'
+                    : 'bg-white/80 hover:bg-white/95 border border-white/70 shadow-xs opacity-85 hover:opacity-100'
                 }`}
               >
-                {/* Thumbnail Image */}
-                <div className="relative w-24 h-16 sm:w-28 sm:h-20 rounded-xl overflow-hidden shrink-0 bg-slate-100 border border-slate-200">
+                {/* Miniature Thumbnail */}
+                <div className="relative w-14 h-10 rounded-lg overflow-hidden shrink-0 bg-slate-100 border border-slate-200">
                   <img
-                    src={slide.image}
+                    src={
+                      slide.id === 'slide-contraceptive'
+                        ? '/assets/images/home/contraceptive_kit_pack.jpg'
+                        : slide.image
+                    }
                     alt={slide.title}
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      target.src = '/assets/images/home/contraceptive_kit_pack.jpg';
+                    }}
                   />
                   {isActive && (
-                    <div className="absolute top-1 left-1 px-1.5 py-0.5 rounded bg-cyan-600 text-white text-[8px] font-mono font-black uppercase shadow-xs">
+                    <div className="absolute top-0.5 left-0.5 px-1 rounded bg-cyan-600 text-white text-[7px] font-mono font-black uppercase">
                       ACTIVE
                     </div>
                   )}
                 </div>
 
-                {/* Text & Specs */}
-                <div className="flex-1 min-w-0 pr-1">
+                {/* Text Summary */}
+                <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between mb-0.5">
-                    <span className="text-[10px] font-mono font-bold text-cyan-700 uppercase">
+                    <span className="text-[9px] font-mono font-bold text-cyan-800 uppercase truncate">
                       {slide.shortLabel}
                     </span>
-                    <span className="text-[10px] font-mono font-bold text-slate-400">
+                    <span className="text-[9px] font-mono text-slate-400">
                       0{index + 1}
                     </span>
                   </div>
-
                   <h4 className="text-xs font-bold text-[#0f2a44] truncate">
                     {slide.subtitle}
                   </h4>
-
-                  <p className="text-[11px] text-slate-500 line-clamp-1 mt-0.5 font-normal">
-                    {slide.highlightText}
-                  </p>
-
-                  <div className="text-[10px] font-mono text-cyan-800 font-semibold mt-1">
-                    {slide.specsPreview[0].label}: {slide.specsPreview[0].val}
-                  </div>
                 </div>
 
-                {/* Animated Progress Bar at bottom of card */}
-                <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-slate-100">
+                {/* Slide Active Progress Line */}
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-slate-100">
                   {isActive ? (
                     <div 
-                      className="h-full bg-gradient-to-r from-cyan-500 to-teal-500 transition-all duration-75"
+                      className="h-full bg-linear-to-r from-cyan-500 to-teal-500 transition-all duration-75"
                       style={{ width: `${progress}%` }}
                     />
                   ) : (
@@ -365,43 +349,25 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             );
           })}
         </div>
-
       </div>
 
-      {/* Hero Bottom Bar / Stats Banner in Frosted Glass */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-20 mt-8">
-        <div className="w-full rounded-2xl bg-white/90 backdrop-blur-md border border-white/80 p-5 sm:p-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-slate-200/80 shadow-lg">
-          
-          {/* Stat 1: +42K RECEIVED ORDERS */}
-          <div className="flex flex-col items-center justify-center pt-2 md:pt-0">
-            <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0f2a44] tracking-tight">
-              +42K
-            </div>
-            <div className="text-[11px] font-bold tracking-widest uppercase text-cyan-700 mt-0.5 font-mono">
-              RECEIVED ORDERS SINCE 2010
-            </div>
+      {/* 4. SLIM SINGLE-LINE STATS TICKER (DOCKS COMPACTLY AT BOTTOM) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-20 mt-4">
+        <div className="w-full rounded-full bg-white/80 backdrop-blur-md border border-white/70 py-2 sm:py-2.5 px-6 flex flex-wrap items-center justify-around gap-4 text-center shadow-md">
+          <div className="flex items-center gap-2">
+            <span className="text-sm sm:text-base font-black text-[#0f2a44]">+42K</span>
+            <span className="text-[10px] font-mono text-cyan-800 font-bold uppercase">Orders Delivered</span>
           </div>
-
-          {/* Stat 2: +250K WOMEN SERVED */}
-          <div className="flex flex-col items-center justify-center pt-4 md:pt-0">
-            <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0f2a44] tracking-tight">
-              +250K
-            </div>
-            <div className="text-[11px] font-bold tracking-widest uppercase text-cyan-700 mt-0.5 font-mono">
-              PATIENTS &amp; WOMEN SERVED
-            </div>
+          <div className="hidden sm:block text-slate-300">|</div>
+          <div className="flex items-center gap-2">
+            <span className="text-sm sm:text-base font-black text-[#0f2a44]">+250K</span>
+            <span className="text-[10px] font-mono text-cyan-800 font-bold uppercase">Women &amp; Families Served</span>
           </div>
-
-          {/* Stat 3: 80+ HOSPITALS EQUIPPED */}
-          <div className="flex flex-col items-center justify-center pt-4 md:pt-0">
-            <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0f2a44] tracking-tight">
-              80+
-            </div>
-            <div className="text-[11px] font-bold tracking-widest uppercase text-cyan-700 mt-0.5 font-mono">
-              INSTITUTIONAL HOSPITALS EQUIPPED
-            </div>
+          <div className="hidden sm:block text-slate-300">|</div>
+          <div className="flex items-center gap-2">
+            <span className="text-sm sm:text-base font-black text-[#0f2a44]">80+</span>
+            <span className="text-[10px] font-mono text-cyan-800 font-bold uppercase">Hospitals Equipped</span>
           </div>
-
         </div>
       </div>
 

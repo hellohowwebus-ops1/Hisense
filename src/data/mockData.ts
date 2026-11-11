@@ -5166,3 +5166,52 @@ export const COMPANY_DETAILS = {
     },
   ],
 };
+
+/**
+ * Deterministically mixes products across all five manufacturing lines
+ * (Contraceptive Range, Surgical Instruments, Dental Instruments, Barber Shears, Beauty & Nail Care)
+ * so that the "ALL PRODUCTS" view showcases a balanced, comprehensive representation on every page.
+ */
+export const getMixedProducts = (allProducts: Product[]): Product[] => {
+  const contraceptive = allProducts.filter((p) => p.category === 'contraceptive-range');
+  const surgical = allProducts.filter((p) => p.category === 'surgical-instruments');
+  const dental = allProducts.filter((p) => p.category === 'dental-instruments');
+  const barber = allProducts.filter((p) => p.category === 'barber-salon-shears');
+  const beauty = allProducts.filter((p) => p.category === 'beauty-nail-care');
+  const others = allProducts.filter(
+    (p) =>
+      !['contraceptive-range', 'surgical-instruments', 'dental-instruments', 'barber-salon-shears', 'beauty-nail-care'].includes(
+        p.category
+      )
+  );
+
+  const mixed: Product[] = [];
+  let ci = 0;
+  let si = 0;
+  let di = 0;
+  let bai = 0;
+  let bei = 0;
+
+  // Interleave in waves of 6 matching the grid layout (1 contraceptive, 1 surgical, 1 dental, 1 barber, 1 beauty, 1 surgical)
+  while (
+    ci < contraceptive.length ||
+    si < surgical.length ||
+    di < dental.length ||
+    bai < barber.length ||
+    bei < beauty.length
+  ) {
+    if (ci < contraceptive.length) mixed.push(contraceptive[ci++]);
+    if (si < surgical.length) mixed.push(surgical[si++]);
+    if (di < dental.length) mixed.push(dental[di++]);
+    if (bai < barber.length) mixed.push(barber[bai++]);
+    if (bei < beauty.length) mixed.push(beauty[bei++]);
+    if (si < surgical.length) mixed.push(surgical[si++]);
+  }
+
+  others.forEach((p) => mixed.push(p));
+
+  return mixed;
+};
+
+export const MIXED_PRODUCTS: Product[] = getMixedProducts(PRODUCTS);
+

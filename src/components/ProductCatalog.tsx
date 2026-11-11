@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { PRODUCTS } from '../data/mockData';
+import { PRODUCTS, MIXED_PRODUCTS } from '../data/mockData';
 import { Product } from '../types';
 import { 
   Search, 
@@ -13,8 +13,6 @@ import {
   ArrowDown,
   ChevronLeft,
   ChevronRight,
-  Download,
-  FolderArchive,
   Grid3X3,
   ListFilter
 } from 'lucide-react';
@@ -43,7 +41,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<string>(propCategory || 'all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(isCompactHome ? 6 : 12);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(isCompactHome ? 8 : 16);
 
   useEffect(() => {
     if (propCategory && propCategory !== selectedCategory) {
@@ -74,7 +72,11 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
 
   const currentCategoryObj = categories.find((c) => c.id === selectedCategory) || categories[0];
 
-  const filteredProducts = PRODUCTS.filter((p) => {
+  // In 'all' view, use the balanced interleaved MIXED_PRODUCTS so the home page presents a diverse mix of all 5 divisions
+  // When a specific category is clicked, use PRODUCTS to display that category's instruments in clean sequence
+  const sourceProducts = selectedCategory === 'all' ? MIXED_PRODUCTS : PRODUCTS;
+
+  const filteredProducts = sourceProducts.filter((p) => {
     const matchesCat = selectedCategory === 'all' || p.category === selectedCategory;
     const matchesSearch =
       p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -142,7 +144,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
           <div>
             <div className="flex flex-wrap items-center gap-2 mb-2">
               <span className="text-xs font-mono font-bold tracking-widest uppercase text-cyan-700 bg-cyan-50 border border-cyan-200 px-2.5 py-0.5 rounded-full">
-                HISENSE 4 CORE MANUFACTURING LINES
+                HISENSE 5 CORE MANUFACTURING &amp; SUPPLY LINES
               </span>
               <span className="text-xs font-mono text-slate-500">
                 • {totalItems} Certified Instruments
@@ -152,7 +154,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
               Instruments &amp; Precision Tools
             </h2>
             <p className="text-slate-600 text-xs sm:text-sm mt-2 max-w-3xl font-normal">
-              Organized into 4 specialized divisions: <strong className="text-slate-800">Surgical Instruments</strong>, <strong className="text-slate-800">Dental Instruments</strong>, <strong className="text-slate-800">Beauty &amp; Nail Care</strong>, and <strong className="text-slate-800">Barber &amp; Salon Hair Shears</strong>.
+              Organized into 5 specialized divisions: <strong className="text-slate-800">Contraceptive Range</strong>, <strong className="text-slate-800">Surgical Instruments</strong>, <strong className="text-slate-800">Dental Instruments</strong>, <strong className="text-slate-800">Beauty &amp; Nail Care</strong>, and <strong className="text-slate-800">Barber &amp; Salon Hair Shears</strong>.
             </p>
           </div>
 
@@ -171,6 +173,16 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
             </div>
 
             {/* Quick Skip Button for Users Not Wanting to Browse Products */}
+            {onNavigateToProductsPage && (
+              <button
+                onClick={onNavigateToProductsPage}
+                className="px-4 py-2.5 rounded-full bg-cyan-700 hover:bg-cyan-800 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-2xs hover:shadow-xs cursor-pointer whitespace-nowrap"
+              >
+                <span>Full Page View</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </button>
+            )}
+
             <button
               onClick={scrollToNextSection}
               className="px-4 py-2.5 rounded-full bg-white hover:bg-slate-100 text-[#0f2a44] text-xs font-bold border border-slate-200 flex items-center justify-center gap-1.5 transition shadow-2xs hover:shadow-xs cursor-pointer whitespace-nowrap"
@@ -179,56 +191,6 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
               <span>Skip to 3D Lab ↓</span>
               <ArrowDown className="w-3.5 h-3.5 text-cyan-600" />
             </button>
-          </div>
-        </div>
-
-        {/* Download & Catalog Banner */}
-        <div className="bg-linear-to-r from-[#0f2a44] to-[#16436e] rounded-2xl p-4 sm:p-5 text-white flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 shadow-sm">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-400/30 flex items-center justify-center shrink-0">
-              <FolderArchive className="w-5 h-5 text-cyan-300" />
-            </div>
-            <div>
-              <div className="text-xs font-bold tracking-wide flex items-center gap-2">
-                <span>Folder-Wise Catalog &amp; Image Packs</span>
-                <span className="text-[10px] font-mono bg-cyan-400/20 text-cyan-200 px-2 py-0.5 rounded-full border border-cyan-300/30">
-                  {filteredProducts.length} Items
-                </span>
-              </div>
-              <p className="text-[11px] text-slate-300">
-                Download high-resolution product photography and technical spec sheets organized by category.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2.5 w-full sm:w-auto">
-            <a
-              href={currentCategoryObj.zip}
-              download
-              className="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-black flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer"
-            >
-              <Download className="w-3.5 h-3.5" />
-              <span>Download {selectedCategory === 'all' ? 'All Catalog' : 'Category'} ZIP</span>
-            </a>
-            {selectedCategory !== 'all' && (
-              <a
-                href="/downloads/Hisense-Complete-Catalog.zip"
-                download
-                className="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-medium flex items-center justify-center gap-1 transition border border-white/20 cursor-pointer"
-                title="Download Master Catalog ZIP (2.6MB)"
-              >
-                <span>Full ZIP</span>
-              </a>
-            )}
-            {onNavigateToProductsPage && (
-              <button
-                onClick={onNavigateToProductsPage}
-                className="px-3 py-2 rounded-xl bg-cyan-950/40 hover:bg-cyan-900/60 text-cyan-200 text-xs font-medium flex items-center justify-center gap-1 transition border border-cyan-400/30 cursor-pointer"
-              >
-                <span>Full Page View</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </button>
-            )}
           </div>
         </div>
 
@@ -264,24 +226,25 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
 
           <div className="flex items-center gap-2">
             {/* Items Per Page Selector */}
+            {/* Items Per Page Selector */}
             <div className="flex items-center gap-1.5 text-xs text-slate-500 font-mono">
               <span className="hidden sm:inline">Per page:</span>
               <button
-                onClick={() => setItemsPerPage(6)}
+                onClick={() => setItemsPerPage(8)}
                 className={`px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
-                  itemsPerPage === 6 ? 'bg-[#0f2a44] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  itemsPerPage === 8 ? 'bg-[#0f2a44] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                 }`}
-                title="Compact view (6 items) - Easy to scroll home page"
+                title="8 items view (4 top, 4 bottom)"
               >
-                6
+                8
               </button>
               <button
-                onClick={() => setItemsPerPage(12)}
+                onClick={() => setItemsPerPage(16)}
                 className={`px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
-                  itemsPerPage === 12 ? 'bg-[#0f2a44] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  itemsPerPage === 16 ? 'bg-[#0f2a44] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                 }`}
               >
-                12
+                16
               </button>
               <button
                 onClick={() => setItemsPerPage(9999)}
@@ -326,105 +289,72 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
             </button>
           </div>
         ) : (
-          /* Products Grid (Compact 6 or 12 items) */
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          /* Products Grid: 4 items per row, 4 on top + 4 on bottom = 8 items total */
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
             {displayedProducts.map((product) => (
               <div
                 key={product.id}
-                className="group bg-white rounded-3xl border border-slate-200/90 hover:border-cyan-500 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden relative"
+                className="group bg-white rounded-2xl border border-slate-200/90 hover:border-cyan-500 shadow-2xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between overflow-hidden relative"
               >
                 {/* Product Card Top */}
-                <div>
-                  {/* Image Container with Full Fit */}
+                <div className="flex flex-col flex-1">
+                  {/* Image Container with Full Fit - Maximized product image in box with minimal padding */}
                   <div 
                     onClick={() => onOpenProductPage ? onOpenProductPage(product) : onOpenProductDetail(product)}
-                    className="w-full h-72 sm:h-80 bg-slate-50 flex items-center justify-center p-6 overflow-hidden relative cursor-pointer border-b border-slate-100"
+                    className="w-full h-64 sm:h-72 bg-slate-50 flex items-center justify-center p-2.5 sm:p-3 overflow-hidden relative cursor-pointer border-b border-slate-100"
                   >
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-contain group-hover:scale-108 transition-transform duration-500"
                       loading="lazy"
                     />
                     
                     {/* Article Number Badge & Category */}
-                    <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between pointer-events-none">
-                      <span className="text-[11px] font-mono font-black tracking-wider uppercase text-cyan-950 bg-cyan-100/95 border border-cyan-300 px-3 py-1 rounded-full shadow-xs backdrop-blur-md">
+                    <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between pointer-events-none gap-1">
+                      <span className="text-[10px] font-mono font-black tracking-wider uppercase text-cyan-950 bg-cyan-100/95 border border-cyan-300 px-2 py-0.5 rounded-full shadow-2xs backdrop-blur-md">
                         {product.articleNo}
                       </span>
-                      <span className="text-[10px] font-mono font-bold tracking-wider uppercase text-slate-700 bg-white/95 border border-slate-200 px-2.5 py-1 rounded-full shadow-xs backdrop-blur-md">
+                      <span className="text-[9px] font-mono font-bold tracking-wider uppercase text-slate-700 bg-white/95 border border-slate-200 px-2 py-0.5 rounded-full shadow-2xs backdrop-blur-md truncate max-w-[125px]">
                         {product.subcategory}
                       </span>
                     </div>
 
                     {/* Hover Inspect CTA */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition backdrop-blur-xs bg-slate-950/25 gap-2">
-                      <span className="px-4 py-2 rounded-full bg-white text-slate-900 text-xs font-black flex items-center gap-1.5 shadow-xl">
-                        <ExternalLink className="w-3.5 h-3.5 text-cyan-600" /> Full Page &amp; Specs
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition backdrop-blur-2xs bg-slate-950/20 gap-2">
+                      <span className="px-3 py-1.5 rounded-full bg-white text-slate-900 text-xs font-black flex items-center gap-1 shadow-lg">
+                        <ExternalLink className="w-3.5 h-3.5 text-cyan-600" /> Full Specs
                       </span>
                     </div>
                   </div>
 
-                  {/* Content Area */}
-                  <div className="p-6">
-                    {/* Article & Specs Strip */}
-                    <div className="flex items-center gap-2 text-xs text-cyan-800 font-mono mb-2">
-                      <span className="font-bold text-[#0f2a44]">{product.articleNo}</span>
-                      <span aria-hidden="true" className="text-slate-300">·</span>
-                      <span className="text-emerald-700 font-semibold">{product.length || 'Surgical Grade'}</span>
-                      <span aria-hidden="true" className="text-slate-300">·</span>
-                      <span className="text-slate-500">
-                        {product.category === 'barber-salon-shears'
-                          ? 'Japanese 440C'
-                          : product.category === 'beauty-nail-care'
-                          ? 'AISI 420 Martensitic'
-                          : product.category === 'dental-instruments'
-                          ? 'Dental Stainless'
-                          : product.category === 'contraceptive-range'
-                          ? 'WHO / DRAP Grade'
-                          : 'AISI 420 Surgical'}
-                      </span>
-                    </div>
+                  {/* Content Area - Clean, prominent title and concise description */}
+                  <div className="p-4 sm:p-4.5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 
+                        onClick={() => onOpenProductPage ? onOpenProductPage(product) : onOpenProductDetail(product)}
+                        className="text-sm sm:text-[15px] font-bold text-[#0f2a44] group-hover:text-cyan-700 transition cursor-pointer leading-snug line-clamp-2"
+                        title={product.name}
+                      >
+                        {product.name}
+                      </h3>
 
-                    <h3 
-                      onClick={() => onOpenProductPage ? onOpenProductPage(product) : onOpenProductDetail(product)}
-                      className="text-base font-bold text-[#0f2a44] group-hover:text-cyan-700 transition cursor-pointer leading-snug line-clamp-2"
-                    >
-                      {product.name}
-                    </h3>
-
-                    <p className="text-xs text-slate-600 mt-2 line-clamp-2 leading-relaxed">
-                      {product.shortDesc}
-                    </p>
-
-                    {/* Certifications line */}
-                    <div className="flex flex-wrap gap-1.5 mt-4 pt-3 border-t border-slate-100">
-                      {product.certifications.map((cert, i) => (
-                        <span key={i} className="text-[10px] font-mono text-cyan-800 bg-cyan-50 border border-cyan-200 px-2 py-0.5 rounded-full font-medium">
-                          ✓ {cert}
-                        </span>
-                      ))}
+                      <p className="text-xs text-slate-500 mt-1.5 line-clamp-2 leading-relaxed">
+                        {product.shortDesc}
+                      </p>
                     </div>
                   </div>
                 </div>
 
-                {/* Action Buttons: Add to RFQ + Download Image */}
-                <div className="p-6 pt-0 flex items-center gap-2">
+                {/* Action Button: Add to RFQ */}
+                <div className="p-4 sm:p-4.5 pt-0">
                   <button
                     onClick={() => onAddToRfq(product)}
-                    className="flex-1 py-3 px-4 rounded-full bg-[#0f2a44] hover:bg-[#153a5c] text-white text-xs font-black flex items-center justify-center gap-2 transition shadow-sm hover:shadow-md cursor-pointer"
+                    className="w-full py-2.5 px-4 rounded-full bg-[#0f2a44] hover:bg-[#153a5c] text-white text-xs font-bold flex items-center justify-center gap-2 transition shadow-2xs hover:shadow-xs cursor-pointer"
                   >
-                    <Plus className="w-4 h-4 text-cyan-400" />
+                    <Plus className="w-3.5 h-3.5 text-cyan-400" />
                     <span>Add to RFQ</span>
                   </button>
-                  <a
-                    href={product.image}
-                    download={`${product.articleNo}.jpg`}
-                    className="p-3 rounded-full bg-slate-100 hover:bg-cyan-50 text-slate-700 hover:text-cyan-700 border border-slate-200 transition cursor-pointer shrink-0"
-                    title={`Download high-res image of ${product.articleNo}`}
-                  >
-                    <Download className="w-4 h-4" />
-                  </a>
                 </div>
 
               </div>
