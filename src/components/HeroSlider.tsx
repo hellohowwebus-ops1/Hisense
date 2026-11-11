@@ -14,8 +14,7 @@ import {
   Award,
   Building2,
   Phone,
-  Clock,
-  Eye
+  Clock
 } from 'lucide-react';
 
 interface HeroSliderProps {
@@ -94,9 +93,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               <img
                 src={slide.backgroundImage}
                 alt={slide.title}
-                className="w-full h-full object-cover object-center filter brightness-[0.98] contrast-[1.02] select-none pointer-events-none"
-                draggable={false}
-                onContextMenu={(e) => e.preventDefault()}
+                className="w-full h-full object-cover object-center filter brightness-[0.98] contrast-[1.02]"
               />
             </div>
           );
@@ -124,19 +121,12 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               {/* Corner Watermark Badge */}
               <div className="absolute -top-10 -right-10 w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl pointer-events-none" />
 
-              {/* Top Corporate Tag with Slide Indicator & Active Facility Tag */}
+              {/* Top Corporate Tag with Active Facility Tag */}
               <div className="flex flex-wrap items-center gap-2 mb-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-200/80">
                   <span className="w-2 h-2 rounded-full bg-cyan-600 animate-pulse" />
                   <span className="text-[11px] font-mono tracking-wider uppercase text-cyan-800 font-bold">
                     {activeSlide.categoryTag}
-                  </span>
-                </div>
-
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100/90 border border-slate-200 text-slate-700">
-                  <Eye className="w-3 h-3 text-cyan-600" />
-                  <span className="text-[11px] font-mono font-bold text-slate-700">
-                    SLIDE 0{currentSlideIndex + 1} / 0{HERO_SLIDES.length}
                   </span>
                 </div>
               </div>
@@ -233,40 +223,16 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             {/* Main Visual Card Container */}
             <div 
               key={`visual-${currentSlideIndex}`}
-              className="relative w-full max-w-[460px] aspect-square rounded-3xl overflow-hidden bg-white/90 p-4 border border-white/90 shadow-2xl backdrop-blur-md animate-float transition-all duration-500"
+              className="relative w-full max-w-[500px] aspect-[16/11] sm:aspect-[16/11] rounded-3xl overflow-hidden bg-white/95 p-3.5 sm:p-4 border border-white/90 shadow-2xl backdrop-blur-md animate-float transition-all duration-500"
             >
               
-              {/* Product Visual of the Active Slide with DRM Protection */}
+              {/* Product Visual of the Active Slide */}
               <img
                 src={activeSlide.image}
                 alt={activeSlide.title}
-                className="w-full h-full object-cover rounded-2xl filter drop-shadow-[0_15px_35px_rgba(2,132,199,0.15)] transition-transform duration-700 hover:scale-105 select-none pointer-events-none"
+                className="w-full h-full object-cover rounded-2xl filter drop-shadow-[0_15px_35px_rgba(2,132,199,0.15)] transition-transform duration-700 hover:scale-105"
                 loading="eager"
-                draggable={false}
-                onContextMenu={(e) => e.preventDefault()}
               />
-              <div className="media-protection-shield rounded-2xl" aria-hidden="true" />
-
-              {/* Real-time Interactive Video Demo Callout */}
-              <button
-                onClick={() => onOpenVideoModal(activeSlide.videoTitle, activeSlide.categoryTag)}
-                className="absolute bottom-6 right-6 z-20 px-4 py-2.5 rounded-full bg-white/95 hover:bg-white border border-slate-200 text-slate-900 text-xs font-bold flex items-center gap-2.5 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all cursor-pointer group"
-              >
-                <div className="w-6 h-6 rounded-full bg-cyan-500 text-white flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Play className="w-3 h-3 fill-white ml-0.5" />
-                </div>
-                <span>Play 4K Reel</span>
-              </button>
-
-              {/* Top Left Spec Badge */}
-              <div className="absolute top-6 left-6 z-20 px-3.5 py-1.5 rounded-full bg-white/90 border border-slate-200 text-[10px] font-mono text-slate-800 font-bold backdrop-blur-md shadow-sm">
-                {activeSlide.badge}
-              </div>
-
-              {/* Top Right Hisense Brand Watermark */}
-              <div className="absolute top-6 right-6 z-20 px-3 py-1 rounded-full bg-[#0f2a44] text-white text-[10px] font-mono font-bold tracking-widest uppercase shadow-md">
-                HISENSE MEDTECH
-              </div>
 
               {/* Floating Slide Navigation Arrows on Visual Card */}
               <button
@@ -346,7 +312,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                 }`}
               >
                 {/* Thumbnail Image */}
-                <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-100 border border-slate-200">
+                <div className="relative w-24 h-16 sm:w-28 sm:h-20 rounded-xl overflow-hidden shrink-0 bg-slate-100 border border-slate-200">
                   <img
                     src={slide.image}
                     alt={slide.title}

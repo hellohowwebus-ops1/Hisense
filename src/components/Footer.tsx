@@ -2,21 +2,41 @@ import React from 'react';
 import { COMPANY_DETAILS } from '../data/mockData';
 import { HisenseLogo } from './HisenseLogo';
 import { ShieldCheck, MapPin, Phone, Mail, Globe, ArrowUp } from 'lucide-react';
+import { AppPage } from './Navbar';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onNavigate?: (page: AppPage, targetSectionId?: string) => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleLink = (e: React.MouseEvent, page: AppPage, sectionId?: string) => {
+    e.preventDefault();
+    if (onNavigate) {
+      onNavigate(page, sectionId);
+    } else {
+      window.location.hash = `#/${page}`;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   return (
     <footer className="bg-[#0b1a2c] text-slate-300 text-xs border-t border-slate-800">
       {/* Top Banner */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 border-b border-slate-800/80">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-14 border-b border-slate-800/80">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
-            <HisenseLogo size="md" light={true} />
+            <button 
+              onClick={(e) => handleLink(e, 'home')}
+              className="text-left cursor-pointer"
+            >
+              <HisenseLogo size="md" light={true} />
+            </button>
             <p className="text-slate-300 text-xs leading-relaxed max-w-sm">
               Established in 2010. Premier manufacturer, importer, exporter and government contractor for advanced IVF &amp; ART technologies, contraceptive range, hospital medical equipment, dental instruments, and turnkey institutional procurement.
             </p>
@@ -35,27 +55,85 @@ export const Footer: React.FC = () => {
               Specialized Divisions
             </h4>
             <ul className="space-y-2 text-slate-400">
-              <li><a href="#products" className="hover:text-cyan-400 transition">Hisense EchoFlex™ IVF Catheters</a></li>
-              <li><a href="#products" className="hover:text-cyan-400 transition">Hisense MicroPoint™ ICSI Needles</a></li>
-              <li><a href="#products" className="hover:text-cyan-400 transition">Hisense Precision-IUI™ Devices</a></li>
-              <li><a href="#products" className="hover:text-cyan-400 transition">Hisense Cu-T 380A® &amp; PPIUCD</a></li>
-              <li><a href="#products" className="hover:text-cyan-400 transition">Hospital Class-B Autoclaves</a></li>
-              <li><a href="#products" className="hover:text-cyan-400 transition">Hisense AeroDent™ Turbines</a></li>
+              <li>
+                <button onClick={(e) => handleLink(e, 'home', 'products')} className="hover:text-cyan-400 transition cursor-pointer text-left">
+                  Hisense EchoFlex™ IVF Catheters
+                </button>
+              </li>
+              <li>
+                <button onClick={(e) => handleLink(e, 'home', 'products')} className="hover:text-cyan-400 transition cursor-pointer text-left">
+                  Hisense MicroPoint™ ICSI Needles
+                </button>
+              </li>
+              <li>
+                <button onClick={(e) => handleLink(e, 'home', 'products')} className="hover:text-cyan-400 transition cursor-pointer text-left">
+                  Hisense Precision-IUI™ Devices
+                </button>
+              </li>
+              <li>
+                <button onClick={(e) => handleLink(e, 'home', 'products')} className="hover:text-cyan-400 transition cursor-pointer text-left">
+                  Hisense Cu-T 380A® &amp; PPIUCD
+                </button>
+              </li>
+              <li>
+                <button onClick={(e) => handleLink(e, 'home', 'products')} className="hover:text-cyan-400 transition cursor-pointer text-left">
+                  Hospital Class-B Autoclaves
+                </button>
+              </li>
+              <li>
+                <button onClick={(e) => handleLink(e, 'home', 'products')} className="hover:text-cyan-400 transition cursor-pointer text-left">
+                  Hisense AeroDent™ Turbines
+                </button>
+              </li>
             </ul>
           </div>
 
-          {/* Institutional Services */}
+          {/* Quick Pages Navigation */}
           <div>
             <h4 className="text-white font-bold uppercase tracking-wider text-[11px] font-mono mb-3">
-              Procurement &amp; Supply
+              Company Pages
             </h4>
             <ul className="space-y-2 text-slate-400">
-              <li><a href="#about" className="hover:text-cyan-400 transition">Government Procurement Tenders</a></li>
-              <li><a href="#about" className="hover:text-cyan-400 transition">Teaching Hospital Frameworks</a></li>
-              <li><a href="#about" className="hover:text-cyan-400 transition">NGO &amp; Donor Supply Projects</a></li>
-              <li><a href="#about" className="hover:text-cyan-400 transition">Local Purchase (LP) Quotations</a></li>
-              <li><a href="#brand-posts" className="hover:text-cyan-400 transition">Cleanroom Facility Upgrades</a></li>
-              <li><a href="#about" className="hover:text-cyan-400 transition">DRAP &amp; Customs Clearance</a></li>
+              <li>
+                <button onClick={(e) => handleLink(e, 'home')} className="hover:text-cyan-400 transition cursor-pointer text-left">
+                  Home Catalog &amp; 3D Lab
+                </button>
+              </li>
+              <li>
+                <button onClick={(e) => handleLink(e, 'about')} className="hover:text-cyan-400 transition cursor-pointer text-left font-semibold text-slate-300">
+                  About Us (Company Heritage)
+                </button>
+              </li>
+              <li>
+                <button onClick={(e) => handleLink(e, 'services')} className="hover:text-cyan-400 transition cursor-pointer text-left font-semibold text-slate-300">
+                  Services &amp; Turnkey Contracting
+                </button>
+              </li>
+              <li>
+                <button onClick={(e) => handleLink(e, 'blog')} className="hover:text-cyan-400 transition cursor-pointer text-left font-semibold text-slate-300">
+                  Insights &amp; Clinical Blog
+                </button>
+              </li>
+              <li>
+                <button onClick={(e) => handleLink(e, 'contact')} className="hover:text-cyan-400 transition cursor-pointer text-left font-semibold text-slate-300">
+                  Contact Us (Headquarters)
+                </button>
+              </li>
+              <li>
+                <button onClick={(e) => handleLink(e, 'about')} className="hover:text-cyan-400 transition cursor-pointer text-left">
+                  Executive Message from CEO
+                </button>
+              </li>
+              <li>
+                <button onClick={(e) => handleLink(e, 'about')} className="hover:text-cyan-400 transition cursor-pointer text-left">
+                  ISO 13485 &amp; DRAP Licenses
+                </button>
+              </li>
+              <li>
+                <button onClick={(e) => handleLink(e, 'contact')} className="hover:text-cyan-400 transition cursor-pointer text-left">
+                  Tender Dossier Inquiry
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -71,15 +149,23 @@ export const Footer: React.FC = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-cyan-400 shrink-0" />
-                <span className="font-mono">0321-0333-8000560</span>
+                <a href="tel:+923218000560" className="font-mono hover:text-white transition">
+                  0321-8000560 / 0333-8000560
+                </a>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-cyan-400 shrink-0" />
-                <span className="truncate">hisenseinternational@gmail.com</span>
+                <a href="mailto:hisenseinternational@gmail.com" className="truncate hover:text-white transition">
+                  hisenseinternational@gmail.com
+                </a>
               </div>
-              <div className="flex items-center gap-2">
-                <Globe className="w-4 h-4 text-cyan-400 shrink-0" />
-                <span>www.hisenseinternational.com</span>
+              <div className="pt-2">
+                <button
+                  onClick={(e) => handleLink(e, 'contact')}
+                  className="w-full py-2 rounded-lg bg-cyan-950 border border-cyan-500/50 text-cyan-300 hover:bg-cyan-900 transition font-bold text-[11px] cursor-pointer"
+                >
+                  Visit Contact Page
+                </button>
               </div>
             </div>
           </div>
@@ -88,7 +174,7 @@ export const Footer: React.FC = () => {
       </div>
 
       {/* Bottom Sub-footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="text-center sm:text-left text-slate-400 text-[11px]">
           © {new Date().getFullYear()} <strong className="text-white">Hisense International</strong>. All Rights Reserved. Minimizing Distances, Promising Happiness.
         </div>

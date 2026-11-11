@@ -138,38 +138,40 @@
   animation-play-state: paused;
 }
 
-/* =========================================================================
-   MEDIA PROTECTION & ANTI-DOWNLOAD / ANTI-SCREENSHOT STYLES
-   ========================================================================= */
-
-/* Prevent image dragging, ghost-drag previews, and callout menus */
-img, video, canvas, [data-protected="true"] {
-  -webkit-user-drag: none !important;
-  -khtml-user-drag: none !important;
-  -moz-user-drag: none !important;
-  -o-user-drag: none !important;
-  user-drag: none !important;
-  user-select: none !important;
-  -webkit-user-select: none !important;
-  -ms-user-select: none !important;
-  -webkit-touch-callout: none !important;
+/* Professional Micro-Interactions & Hover Animations */
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 30px -10px rgba(15, 42, 68, 0.12);
 }
 
-/* Invisible click & drag interceptor shield overlay */
-.media-protection-shield {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-  background: transparent;
-  pointer-events: auto;
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-/* Print Protection: Blank out entire page if user tries Ctrl+P / Save to PDF */
-@media print {
-  html, body {
-    display: none !important;
-    visibility: hidden !important;
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px -3px rgba(6, 182, 212, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 28px 2px rgba(6, 182, 212, 0.6);
   }
 }
+
+.animate-pulse-glow {
+  animation: pulseGlow 3.5s ease-in-out infinite;
+}
+
+@keyframes badgeShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.badge-shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: badgeShimmer 4s infinite;
+}
+

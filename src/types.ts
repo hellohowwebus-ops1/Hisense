@@ -1,7 +1,8 @@
 export interface Product {
   id: string;
+  articleNo: string;
   name: string;
-  category: 'ivf-art' | 'contraceptive' | 'medical-equipment' | 'dental' | 'cssd-disposables' | 'government-order';
+  category: string;
   subcategory: string;
   shortDesc: string;
   fullDesc: string;
@@ -12,6 +13,8 @@ export interface Product {
   inStock: boolean;
   leadTime: string;
   image: string;
+  downloadPath?: string;
+  length?: string;
   badge?: string;
 }
 
@@ -51,4 +54,24 @@ export interface BrandPost {
   readTime: string;
   author: string;
   tags: string[];
+  content?: string;
 }
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  category: string;
+  date: string;
+  excerpt: string;
+  content: string;
+  image: string;
+  readTime: string;
+  author: string;
+  authorRole?: string;
+  tags: string[];
+  featured?: boolean;
+  published?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
+

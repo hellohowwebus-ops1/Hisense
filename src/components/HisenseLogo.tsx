@@ -22,7 +22,7 @@ export const HisenseLogo: React.FC<LogoProps> = ({
 
   const imageElement = (
     <img
-      src="/hisense-logo.png"
+      src="/assets/images/brand/hisense_official_logo.png"
       alt="Hisense International"
       className={`${heightMap[size]} w-auto object-contain transition-transform duration-200 hover:scale-105`}
       loading="eager"

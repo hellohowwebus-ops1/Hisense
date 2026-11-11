@@ -3,42 +3,131 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
-import { Navbar } from './components/Navbar';
-import { HeroSlider } from './components/HeroSlider';
-import { ThreeDShowcase } from './components/ThreeDShowcase';
-import { CorporateReliabilityTicker } from './components/CorporateReliabilityTicker';
-import { ProductCatalog } from './components/ProductCatalog';
-import { BrandPostsSection } from './components/BrandPostsSection';
-import { AboutCompany } from './components/AboutCompany';
-import { ContactSection } from './components/ContactSection';
+import React, { useState, useEffect } from 'react';
+import { Navbar, AppPage } from './components/Navbar';
+import { HomePage } from './pages/HomePage';
+import { AboutPage } from './pages/AboutPage';
+import { ServicesPage } from './pages/ServicesPage';
+import { ContactPage } from './pages/ContactPage';
+import { BlogPage } from './pages/BlogPage';
+import { ProductDetailPage } from './pages/ProductDetailPage';
+import { ProductsPage } from './pages/ProductsPage';
 import { Footer } from './components/Footer';
 import { VideoModal } from './components/VideoModal';
 import { PresentationMode } from './components/PresentationMode';
 import { RfqBuilderModal } from './components/RfqBuilderModal';
 import { ProductDetailModal } from './components/ProductDetailModal';
-import { MediaProtectionProvider } from './components/MediaProtectionProvider';
 import { Product, RfqItem } from './types';
-import { PRODUCTS, COMPANY_DETAILS } from './data/mockData';
-import { 
-  ShieldCheck, 
-  Sparkles, 
-  Activity, 
-  Microscope, 
-  CheckCircle2, 
-  Truck,
-  ArrowRight,
-  Sliders,
-  Award,
-  Layers,
-  HeartHandshake
-} from 'lucide-react';
+import { PRODUCTS } from './data/mockData';
 
 export default function App() {
+  // Page Routing State (syncs with hash: '#/about', '#/services', '#/blog', '#/contact', '#/products', '#/home', '#product/<id>' or '#/')
+  const [currentPage, setCurrentPage] = useState<AppPage>(() => {
+    const hash = window.location.hash.toLowerCase();
+    if (hash.includes('about')) return 'about';
+    if (hash.includes('services') || hash.includes('service')) return 'services';
+    if (hash.includes('blog')) return 'blog';
+    if (hash.includes('contact')) return 'contact';
+    if (hash.startsWith('#/products') || hash === '#/products') return 'products';
+    if (hash.includes('product/')) return 'product-detail';
+    return 'home';
+  });
+
+  // Selected Product for dedicated Full Page View
+  const [selectedProductForPage, setSelectedProductForPage] = useState<Product>(() => {
+    const hash = window.location.hash;
+    if (hash.includes('product/')) {
+      const pid = hash.split('product/')[1]?.toLowerCase();
+      const found = PRODUCTS.find((p) => p.id === pid || p.articleNo.toLowerCase().replace(' ', '-') === pid);
+      if (found) return found;
+    }
+    return PRODUCTS[0];
+  });
+
+  // Selected Category filter for Catalog
+  const [selectedCategoryForCatalog, setSelectedCategoryForCatalog] = useState<string>('all');
+
+  // Listen to browser back/forward and hash changes
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.toLowerCase();
+      if (hash.includes('about')) {
+        setCurrentPage('about');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash.includes('services') || hash.includes('service')) {
+        setCurrentPage('services');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash.includes('blog')) {
+        setCurrentPage('blog');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash.includes('contact')) {
+        setCurrentPage('contact');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash.startsWith('#/products') || hash === '#/products') {
+        setCurrentPage('products');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash.includes('product/')) {
+        const pid = hash.split('product/')[1];
+        const found = PRODUCTS.find((p) => p.id === pid || p.articleNo.toLowerCase().replace(' ', '-') === pid);
+        if (found) {
+          setSelectedProductForPage(found);
+        }
+        setCurrentPage('product-detail');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        setCurrentPage('home');
+        if (hash.includes('products')) {
+          setTimeout(() => {
+            const el = document.getElementById('products');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }, 150);
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  // Programmatic navigation handler
+  const handleNavigate = (page: AppPage, targetSectionId?: string) => {
+    setCurrentPage(page);
+    if (page === 'home') {
+      if (targetSectionId) {
+        window.location.hash = `#/${page}`;
+        setTimeout(() => {
+          const el = document.getElementById(targetSectionId);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 150);
+      } else {
+        window.location.hash = '#/';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else if (page === 'product-detail') {
+      window.location.hash = `#product/${selectedProductForPage.id}`;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (page === 'products') {
+      window.location.hash = '#/products';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      window.location.hash = `#/${page}`;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handleOpenProductFullPage = (product: Product) => {
+    setSelectedProductForPage(product);
+    setCurrentPage('product-detail');
+    window.location.hash = `#product/${product.id}`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   // RFQ Cart State
   const [rfqItems, setRfqItems] = useState<RfqItem[]>([
     { product: PRODUCTS[0], quantity: 100 },
-    { product: PRODUCTS[5], quantity: 50 },
+    { product: PRODUCTS[3], quantity: 50 },
   ]);
 
   // Modal States
@@ -55,15 +144,15 @@ export default function App() {
   const [active3dModel, setActive3dModel] = useState<'catheter' | 'pipette' | 'surgical' | 'autoclave' | 'copper-t'>('catheter');
 
   // RFQ Handlers
-  const handleAddToRfq = (product: Product) => {
+  const handleAddToRfq = (product: Product, quantity = 50) => {
     setRfqItems((prev) => {
       const existing = prev.find((item) => item.product.id === product.id);
       if (existing) {
         return prev.map((item) =>
-          item.product.id === product.id ? { ...item, quantity: item.quantity + 50 } : item
+          item.product.id === product.id ? { ...item, quantity: item.quantity + quantity } : item
         );
       }
-      return [...prev, { product, quantity: 50 }];
+      return [...prev, { product, quantity }];
     });
     setIsRfqOpen(true);
   };
@@ -90,9 +179,18 @@ export default function App() {
   // 3D Jump Handler
   const handleOpen3d = (modelKey: 'catheter' | 'pipette' | 'surgical' | 'autoclave' | 'copper-t') => {
     setActive3dModel(modelKey);
-    const element = document.getElementById('3d-demo');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (currentPage !== 'home') {
+      setCurrentPage('home');
+      window.location.hash = '#/home';
+      setTimeout(() => {
+        const element = document.getElementById('3d-demo');
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+    } else {
+      const element = document.getElementById('3d-demo');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -102,165 +200,136 @@ export default function App() {
   };
 
   return (
-    <MediaProtectionProvider>
-      <div className="min-h-screen bg-white text-slate-900 flex flex-col font-sans selection:bg-cyan-600 selection:text-white">
-      
-      {/* Navigation in Crisp White Medical Styling */}
-      <Navbar
-        rfqCount={rfqItems.reduce((acc, i) => acc + i.quantity, 0)}
-        onOpenRfq={() => setIsRfqOpen(true)}
-        onOpenPresentation={() => setIsPresentationOpen(true)}
-        onNavigateTo3d={() => handleOpen3d(active3dModel)}
-      />
-
-      {/* Main Content Sections */}
-      <main id="home" className="flex-1">
+    <div className="min-h-screen bg-white text-slate-900 flex flex-col font-sans selection:bg-cyan-600 selection:text-white">
         
-        {/* 1. Hero Section on Pure White Background */}
-        <HeroSlider
-          onOpen3dModel={handleOpen3d}
-          onOpenVideoModal={handleOpenVideoModal}
-          onOpenRfqModal={() => setIsRfqOpen(true)}
+        {/* Navigation Bar with Active Page Highlight & Mega Menu */}
+        <Navbar
+          rfqCount={rfqItems.reduce((acc, i) => acc + i.quantity, 0)}
+          onOpenRfq={() => setIsRfqOpen(true)}
+          currentPage={currentPage}
+          onNavigate={handleNavigate}
+          onSelectCategory={(catId) => {
+            setSelectedCategoryForCatalog(catId);
+          }}
         />
 
-        {/* Dual Continuous Reliability & International Standards Sliding Tickers (Right below Hero, above Catalog) */}
-        <CorporateReliabilityTicker />
+        {/* Dynamic Multi-Page Router Views */}
+        {currentPage === 'home' && (
+          <HomePage
+            onOpen3d={handleOpen3d}
+            onOpenVideoModal={handleOpenVideoModal}
+            onOpenRfq={() => setIsRfqOpen(true)}
+            onAddToRfq={handleAddToRfq}
+            onOpenProductDetail={(prod) => setSelectedProductDetail(prod)}
+            onOpenProductPage={handleOpenProductFullPage}
+            onNavigateAbout={() => handleNavigate('about')}
+            onNavigateContact={() => handleNavigate('contact')}
+            onNavigateServices={() => handleNavigate('services')}
+            onNavigateBlog={() => handleNavigate('blog')}
+            onNavigateProducts={(catId) => {
+              if (catId) setSelectedCategoryForCatalog(catId);
+              handleNavigate('products');
+            }}
+            active3dModel={active3dModel}
+            selectedCategory={selectedCategoryForCatalog}
+            onCategoryChange={(catId) => setSelectedCategoryForCatalog(catId)}
+          />
+        )}
 
-        {/* 2. Specialized Medical Devices & Consumables Catalog */}
-        <ProductCatalog
-          onLaunch3d={handleOpen3d}
-          onAddToRfq={handleAddToRfq}
-          onOpenProductDetail={(prod) => setSelectedProductDetail(prod)}
-        />
+        {currentPage === 'products' && (
+          <ProductsPage
+            onNavigateHome={() => handleNavigate('home')}
+            onOpenProductDetail={(prod) => setSelectedProductDetail(prod)}
+            onOpenProductPage={handleOpenProductFullPage}
+            onAddToRfq={handleAddToRfq}
+            onOpenRfq={() => setIsRfqOpen(true)}
+            initialCategory={selectedCategoryForCatalog}
+          />
+        )}
 
-        {/* 3. Interactive 3D Medical Device & VFX Studio */}
-        <div className="relative bg-slate-50 text-slate-900 border-b border-slate-200" id="3d-demo">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-            <div className="inline-flex items-center gap-2 text-xs font-mono font-bold tracking-widest uppercase text-cyan-800 mb-2">
-              <Sparkles className="w-3.5 h-3.5 text-cyan-600" />
-              HISENSE 3D PRODUCT DEMONSTRATION &amp; VFX LAB
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0f2a44] tracking-tight uppercase">
-              Sub-Micron Precision &amp; Device Functionality
-            </h2>
-            <p className="text-slate-600 text-xs sm:text-sm max-w-2xl mx-auto mt-2">
-              Rotate in 360°, inspect exploded assemblies, switch to Holographic X-Ray mode, or view clinical engineering tolerances in real-time WebGL.
-            </p>
-          </div>
+        {currentPage === 'about' && (
+          <AboutPage
+            onNavigateHome={() => handleNavigate('home')}
+            onNavigateContact={() => handleNavigate('contact')}
+            onOpenRfq={() => setIsRfqOpen(true)}
+            onNavigateProducts={() => handleNavigate('products')}
+          />
+        )}
 
-          <ThreeDShowcase
-            initialModel={active3dModel}
-            onSelectProductForRfq={(modelKey) => {
-              const matched = PRODUCTS.find((p) => p.model3dKey === modelKey) || PRODUCTS[0];
-              handleAddToRfq(matched);
+        {currentPage === 'services' && (
+          <ServicesPage
+            onNavigateHome={() => handleNavigate('home')}
+            onNavigateContact={() => handleNavigate('contact')}
+            onOpenRfq={() => setIsRfqOpen(true)}
+            onNavigateProducts={() => handleNavigate('products')}
+          />
+        )}
+
+        {currentPage === 'blog' && (
+          <BlogPage
+            onNavigateHome={() => handleNavigate('home')}
+            onNavigateContact={() => handleNavigate('contact')}
+            onSelectCategory={(catId) => {
+              setSelectedCategoryForCatalog(catId);
+              handleNavigate('products');
             }}
           />
-        </div>
+        )}
 
-        {/* 4. Clinical Functionality & Quality Assurance Pillars */}
-        <section className="py-20 bg-white border-b border-slate-200">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-2xl mb-12">
-              <div className="text-xs font-mono font-bold tracking-widest uppercase text-cyan-700 mb-1">
-                ENGINEERING RIGOR &amp; VALIDATION
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-black text-[#0f2a44] uppercase tracking-tight">
-                Pioneering Healthcare Standards in Pakistan
-              </h3>
-            </div>
+        {currentPage === 'contact' && (
+          <ContactPage
+            onNavigateHome={() => handleNavigate('home')}
+            onNavigateAbout={() => handleNavigate('about')}
+            onOpenRfq={() => setIsRfqOpen(true)}
+          />
+        )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              
-              <div className="p-6 rounded-3xl bg-slate-50 border border-slate-200/90 shadow-sm hover:shadow-lg hover:border-cyan-500 transition">
-                <div className="w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-800 flex items-center justify-center mb-4">
-                  <Microscope className="w-6 h-6 text-cyan-700" />
-                </div>
-                <h4 className="text-base font-bold text-[#0f2a44] mb-2">Class 10,000 Cleanroom</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Manufactured under particulate-controlled cleanroom environments with zero pyrogens and endotoxin &lt; 0.05 EU/device.
-                </p>
-              </div>
+        {/* Full Dedicated Page for Surgical Product Details */}
+        {currentPage === 'product-detail' && (
+          <ProductDetailPage
+            product={selectedProductForPage}
+            onBackToCatalog={() => handleNavigate('products')}
+            onSelectProduct={(p) => handleOpenProductFullPage(p)}
+            onAddToRfq={handleAddToRfq}
+            onOpenRfq={() => setIsRfqOpen(true)}
+          />
+        )}
 
-              <div className="p-6 rounded-3xl bg-slate-50 border border-slate-200/90 shadow-sm hover:shadow-lg hover:border-cyan-500 transition">
-                <div className="w-12 h-12 rounded-2xl bg-blue-100 text-blue-800 flex items-center justify-center mb-4">
-                  <Activity className="w-6 h-6 text-blue-700" />
-                </div>
-                <h4 className="text-base font-bold text-[#0f2a44] mb-2">Ultrasound Echogenicity</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Tip micro-bead texturing engineered for maximum acoustic reflection under 2D/3D/4D ultrasound, ensuring safe embryo transfer.
-                </p>
-              </div>
+        {/* Universal Footer with Page Navigation */}
+        <Footer onNavigate={handleNavigate} />
 
-              <div className="p-6 rounded-3xl bg-slate-50 border border-slate-200/90 shadow-sm hover:shadow-lg hover:border-cyan-500 transition">
-                <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center mb-4">
-                  <ShieldCheck className="w-6 h-6 text-emerald-700" />
-                </div>
-                <h4 className="text-base font-bold text-[#0f2a44] mb-2">MEA Biocompatibility</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  1-cell Mouse Embryo Assay validated with &gt; 80% blastocyst development rates, preventing cellular toxicity during in-vitro handling.
-                </p>
-              </div>
+        {/* Global Interactive Modals */}
+        <VideoModal
+          isOpen={videoModalData.isOpen}
+          onClose={() => setVideoModalData({ isOpen: false, title: '', category: '' })}
+          title={videoModalData.title}
+          category={videoModalData.category}
+        />
 
-              <div className="p-6 rounded-3xl bg-slate-50 border border-slate-200/90 shadow-sm hover:shadow-lg hover:border-cyan-500 transition">
-                <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center mb-4">
-                  <Truck className="w-6 h-6 text-amber-700" />
-                </div>
-                <h4 className="text-base font-bold text-[#0f2a44] mb-2">24–48h Rapid Dispatch</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Central Multan Road warehouse in Lahore maintains standing reserve inventory for rapid delivery to teaching hospitals nationwide.
-                </p>
-              </div>
+        <PresentationMode
+          isOpen={isPresentationOpen}
+          onClose={() => setIsPresentationOpen(false)}
+          onOpen3d={handleOpen3d}
+        />
 
-            </div>
-          </div>
-        </section>
+        <RfqBuilderModal
+          isOpen={isRfqOpen}
+          onClose={() => setIsRfqOpen(false)}
+          rfqItems={rfqItems}
+          onUpdateQuantity={handleUpdateQuantity}
+          onRemoveItem={handleRemoveItem}
+          onClearAll={handleClearAll}
+          onAddItem={handleAddItemById}
+        />
 
-        {/* 5. Hisense Corporate Brand Insights & Media Posts */}
-        <BrandPostsSection />
-
-        {/* 6. Company Heritage, Executive Card & Leadership */}
-        <AboutCompany onOpenRfq={() => setIsRfqOpen(true)} />
-
-        {/* 7. Contact Headquarters & Direct Lines */}
-        <ContactSection />
-
-      </main>
-
-      {/* Footer */}
-      <Footer />
-
-      {/* Interactive Modals */}
-      <VideoModal
-        isOpen={videoModalData.isOpen}
-        onClose={() => setVideoModalData({ isOpen: false, title: '', category: '' })}
-        title={videoModalData.title}
-        category={videoModalData.category}
-      />
-
-      <PresentationMode
-        isOpen={isPresentationOpen}
-        onClose={() => setIsPresentationOpen(false)}
-        onOpen3d={handleOpen3d}
-      />
-
-      <RfqBuilderModal
-        isOpen={isRfqOpen}
-        onClose={() => setIsRfqOpen(false)}
-        rfqItems={rfqItems}
-        onUpdateQuantity={handleUpdateQuantity}
-        onRemoveItem={handleRemoveItem}
-        onClearAll={handleClearAll}
-        onAddItem={handleAddItemById}
-      />
-
-      <ProductDetailModal
-        product={selectedProductDetail}
-        onClose={() => setSelectedProductDetail(null)}
-        onLaunch3d={handleOpen3d}
-        onAddToRfq={handleAddToRfq}
-      />
+        <ProductDetailModal
+          product={selectedProductDetail}
+          onClose={() => setSelectedProductDetail(null)}
+          onLaunch3d={handleOpen3d}
+          onAddToRfq={handleAddToRfq}
+          onOpenFullPage={handleOpenProductFullPage}
+        />
 
       </div>
-    </MediaProtectionProvider>
   );
 }

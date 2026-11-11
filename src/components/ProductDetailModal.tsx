@@ -1,12 +1,13 @@
 import React from 'react';
 import { Product } from '../types';
-import { X, CheckCircle, ShieldCheck, Sliders, Plus, ExternalLink, PhoneCall, Share2 } from 'lucide-react';
+import { X, CheckCircle, ShieldCheck, Sliders, Plus, ExternalLink, PhoneCall, Share2, Download } from 'lucide-react';
 
 interface ProductDetailModalProps {
   product: Product | null;
   onClose: () => void;
   onLaunch3d: (modelKey: 'catheter' | 'pipette' | 'surgical' | 'autoclave' | 'copper-t') => void;
   onAddToRfq: (product: Product) => void;
+  onOpenFullPage?: (product: Product) => void;
 }
 
 export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
@@ -14,51 +15,72 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   onClose,
   onLaunch3d,
   onAddToRfq,
+  onOpenFullPage,
 }) => {
   if (!product) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
-      <div className="relative w-full max-w-3xl bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      <div className="relative w-full max-w-4xl bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
         
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 bg-slate-50/80">
           <div>
-            <span className="text-[10px] font-mono font-bold tracking-widest text-cyan-800 uppercase bg-cyan-50 px-2 py-0.5 rounded border border-cyan-200">
-              {product.subcategory}
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] font-mono font-black text-cyan-900 uppercase bg-cyan-100 px-2.5 py-0.5 rounded-full border border-cyan-300">
+                {product.articleNo}
+              </span>
+              <span className="text-[10px] font-mono font-bold tracking-widest text-slate-700 uppercase bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                {product.subcategory}
+              </span>
+            </div>
             <h3 className="text-xl font-bold text-[#0f2a44] mt-1 leading-snug">
               {product.name}
             </h3>
           </div>
-          <button
-            onClick={onClose}
-            className="p-2 rounded-full bg-slate-100 text-slate-500 hover:text-slate-900 hover:bg-slate-200 transition cursor-pointer"
-          >
-            <X className="w-5 h-5" />
-          </button>
+
+          <div className="flex items-center gap-2">
+            {onOpenFullPage && (
+              <button
+                onClick={() => {
+                  onOpenFullPage(product);
+                  onClose();
+                }}
+                className="px-3.5 py-1.5 rounded-full bg-cyan-700 hover:bg-cyan-800 text-white text-xs font-bold flex items-center gap-1.5 transition shadow-xs cursor-pointer"
+                title="Open in dedicated full page"
+              >
+                <span>Full Page View</span>
+              </button>
+            )}
+            <button
+              onClick={onClose}
+              className="p-2 rounded-full bg-slate-100 text-slate-500 hover:text-slate-900 hover:bg-slate-200 transition cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
         {/* Content */}
         <div className="flex-1 overflow-y-auto p-6 space-y-6">
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-            {/* Left Image & Status */}
+            {/* Left Image & Status: Completely Uncropped with object-contain */}
             <div>
-              <div className="rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 aspect-[4/3] relative">
+              <div className="rounded-2xl overflow-hidden bg-linear-to-b from-slate-50 to-slate-100/80 border border-slate-200 h-80 sm:h-[400px] flex items-center justify-center p-6 relative">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover select-none pointer-events-none"
-                  draggable={false}
-                  onContextMenu={(e) => e.preventDefault()}
+                  className="w-full h-full object-contain filter drop-shadow-sm"
                 />
-                <div className="media-protection-shield" aria-hidden="true" />
                 {product.badge && (
                   <span className="absolute top-3 left-3 text-[10px] font-black px-2.5 py-1 rounded-full bg-cyan-600 text-white shadow-xs">
                     {product.badge}
                   </span>
                 )}
+                <div className="absolute bottom-2 text-center text-[10px] text-slate-400 font-mono">
+                  Full uncropped instrument view
+                </div>
               </div>
 
               <div className="flex items-center justify-between mt-3 text-xs text-slate-700 p-3 bg-slate-50 rounded-xl border border-slate-200">
@@ -151,6 +173,15 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
           </div>
 
           <div className="flex items-center gap-3">
+            <a
+              href={product.image}
+              download={`${product.articleNo}.jpg`}
+              className="px-4 py-2 rounded-full bg-slate-100 hover:bg-cyan-50 text-slate-800 hover:text-cyan-800 text-xs font-bold flex items-center gap-1.5 transition border border-slate-200 cursor-pointer"
+            >
+              <Download className="w-3.5 h-3.5 text-cyan-600" />
+              <span>Download Image</span>
+            </a>
+
             {product.model3dKey && (
               <button
                 onClick={() => {

@@ -58,7 +58,7 @@ export const RfqBuilderModal: React.FC<RfqBuilderModalProps> = ({
       msg += `- General Catalogue & Price Inquiry\n`;
     } else {
       rfqItems.forEach((item, idx) => {
-        msg += `${idx + 1}. ${item.product.name} (Qty: ${item.quantity})\n   - Subcategory: ${item.product.subcategory}\n`;
+        msg += `${idx + 1}. [${item.product.articleNo}] ${item.product.name} (Qty: ${item.quantity})\n   - Category: ${item.product.subcategory}\n`;
       });
     }
 
@@ -172,8 +172,13 @@ export const RfqBuilderModal: React.FC<RfqBuilderModalProps> = ({
                         className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs"
                       >
                         <div className="flex-1 pr-3">
-                          <div className="font-bold text-slate-900 text-sm">{item.product.name}</div>
-                          <div className="text-slate-500 text-[11px] font-mono">{item.product.subcategory}</div>
+                          <div className="flex items-center gap-2">
+                            <span className="font-mono text-[10px] font-black bg-cyan-100 text-cyan-900 px-1.5 py-0.5 rounded border border-cyan-300">
+                              {item.product.articleNo}
+                            </span>
+                            <span className="font-bold text-slate-900 text-sm">{item.product.name}</span>
+                          </div>
+                          <div className="text-slate-500 text-[11px] font-mono mt-0.5">{item.product.subcategory}</div>
                         </div>
 
                         {/* Quantity Controls */}

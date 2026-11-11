@@ -13,9 +13,10 @@ import {
 
 interface BrandPostsSectionProps {
   onOpenArticle?: (postId: string) => void;
+  onNavigateBlog?: () => void;
 }
 
-export const BrandPostsSection: React.FC<BrandPostsSectionProps> = () => {
+export const BrandPostsSection: React.FC<BrandPostsSectionProps> = ({ onNavigateBlog }) => {
   return (
     <section className="py-24 bg-white border-b border-slate-200 relative" id="brand-posts">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -35,10 +36,16 @@ export const BrandPostsSection: React.FC<BrandPostsSectionProps> = () => {
             </p>
           </div>
 
-          <div className="hidden md:flex items-center gap-2 text-xs font-mono font-bold text-slate-500">
-            <span>OFFICIAL PRESS DESK</span>
-            <span>·</span>
-            <span className="text-cyan-700">HISENSE INTERNATIONAL</span>
+          <div className="flex items-center gap-3">
+            {onNavigateBlog && (
+              <button
+                onClick={onNavigateBlog}
+                className="px-5 py-2.5 rounded-full bg-[#0f2a44] hover:bg-[#153a5c] text-white text-xs font-bold flex items-center gap-2 transition shadow-xs cursor-pointer"
+              >
+                <span>Explore Full Blog &amp; Insights</span>
+                <ArrowRight className="w-3.5 h-3.5 text-cyan-400" />
+              </button>
+            )}
           </div>
         </div>
 
@@ -47,7 +54,8 @@ export const BrandPostsSection: React.FC<BrandPostsSectionProps> = () => {
           {BRAND_POSTS.map((post) => (
             <article
               key={post.id}
-              className="group bg-white rounded-3xl border border-slate-200/90 hover:border-cyan-500 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden"
+              onClick={onNavigateBlog}
+              className="group bg-white rounded-3xl border border-slate-200/90 hover:border-cyan-500 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer"
             >
               <div>
                 {/* Post Featured Image with Hisense Branded Photography */}
