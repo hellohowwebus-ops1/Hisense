@@ -1,0 +1,26 @@
+{
+  "id": "sanwa-surg-01",
+  "title": "Drap Sheet",
+  "category": "Surgical",
+  "subcategory": "Sterile Sheets & Drapes",
+  "price": "In Stock",
+  "currency": "PKR",
+  "sku": "STC-SURG-001",
+  "description": "Sterile drap sheet designed to maintain a clean and contamination-free environment during medical and surgical procedures.",
+  "attributes": {
+    "Sterility": "Sterile Packed",
+    "Application": "Hospital & Surgical Field Coverage",
+    "Origin": "Sanwa Certified Medical Grade"
+  },
+  "images": [
+    {
+      "filename": "image_01_highres.jpg",
+      "originalUrl": "https://www.sanwatradingcorporation.com/surgical-images/Drap%20Sheet.jpg",
+      "highResolutionSource": "https://www.sanwatradingcorporation.com/surgical-images/Drap%20Sheet.jpg",
+      "width": 2400,
+      "height": 2400
+    }
+  ],
+  "sourceUrl": "https://www.sanwatradingcorporation.com/surgical.html",
+  "exportedAt": "2026-11-12T06:40:01.842Z"
+}

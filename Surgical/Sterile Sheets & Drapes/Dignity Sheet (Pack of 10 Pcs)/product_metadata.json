@@ -1,0 +1,25 @@
+{
+  "id": "sanwa-surg-06",
+  "title": "Dignity Sheet (Pack of 10 Pcs)",
+  "category": "Surgical",
+  "subcategory": "Sterile Sheets & Drapes",
+  "price": "In Stock",
+  "currency": "PKR",
+  "sku": "STC-DIG-10",
+  "description": "Multi-layer absorbent underpad dignity sheet with waterproof backing to protect surgical and examination beds.",
+  "attributes": {
+    "Packaging": "Pack of 10 Pcs",
+    "Layer": "High Absorbent Polymer Core"
+  },
+  "images": [
+    {
+      "filename": "image_01_highres.jpg",
+      "originalUrl": "https://www.sanwatradingcorporation.com/lab-images/Dignity-Sheet.png",
+      "highResolutionSource": "https://www.sanwatradingcorporation.com/lab-images/Dignity-Sheet.png",
+      "width": 2400,
+      "height": 2400
+    }
+  ],
+  "sourceUrl": "https://www.sanwatradingcorporation.com/surgical.html",
+  "exportedAt": "2026-11-12T06:40:06.536Z"
+}

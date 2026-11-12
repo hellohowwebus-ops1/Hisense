@@ -34,6 +34,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   initialCategory = 'all',
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
+  const [selectedSubcategory, setSelectedSubcategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(12);
@@ -41,16 +42,18 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   useEffect(() => {
     if (initialCategory) {
       setSelectedCategory(initialCategory);
+      setSelectedSubcategory('all');
     }
   }, [initialCategory]);
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [selectedCategory, searchQuery, itemsPerPage]);
+  }, [selectedCategory, selectedSubcategory, searchQuery, itemsPerPage]);
 
   const categories = [
-    { id: 'all', label: 'All Products (97)', zip: '/downloads/Hisense-Complete-Catalog.zip', count: 97 },
+    { id: 'all', label: 'All Products (109)', zip: '/downloads/Hisense-Complete-Catalog.zip', count: 109 },
     { id: 'surgical-instruments', label: 'Surgical Instruments (49)', zip: '/downloads/Hisense-Surgical-Instruments.zip', count: 49 },
+    { id: 'surgical-disposables', label: 'Surgical Disposables (12)', zip: '/downloads/Hisense-Surgical-Disposables.zip', count: 12 },
     { id: 'contraceptive-range', label: 'Contraceptive Range (18)', zip: '/downloads/Hisense-Contraceptive-Range.zip', count: 18 },
     { id: 'dental-instruments', label: 'Dental Instruments (10)', zip: '/downloads/Hisense-Dental-Instruments.zip', count: 10 },
     { id: 'beauty-nail-care', label: 'Beauty & Nail Care (10)', zip: '/downloads/Hisense-Beauty-Nail-Care.zip', count: 10 },
@@ -59,16 +62,30 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
 
   const currentCategoryObj = categories.find((c) => c.id === selectedCategory) || categories[0];
 
+  const subcategories = React.useMemo(() => {
+    const pool = selectedCategory === 'all' 
+      ? PRODUCTS 
+      : PRODUCTS.filter((p) => p.category === selectedCategory);
+    const counts: { [key: string]: number } = {};
+    pool.forEach((p) => {
+      if (p.subcategory) {
+        counts[p.subcategory] = (counts[p.subcategory] || 0) + 1;
+      }
+    });
+    return Object.entries(counts).map(([name, count]) => ({ name, count }));
+  }, [selectedCategory]);
+
   const sourceProducts = selectedCategory === 'all' ? MIXED_PRODUCTS : PRODUCTS;
 
   const filteredProducts = sourceProducts.filter((p) => {
     const matchesCat = selectedCategory === 'all' || p.category === selectedCategory;
+    const matchesSubcat = selectedSubcategory === 'all' || p.subcategory === selectedSubcategory;
     const matchesSearch =
       p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.articleNo.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.shortDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.subcategory.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCat && matchesSearch;
+    return matchesCat && matchesSubcat && matchesSearch;
   });
 
   const totalItems = filteredProducts.length;
@@ -129,7 +146,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                 Complete Products Catalog
               </h1>
               <p className="text-slate-300 text-xs sm:text-sm mt-2 max-w-2xl font-normal">
-                Explore all 97 precision instruments across 5 specialized divisions. Manufactured to ISO 13485:2016, CE Medical &amp; DRAP standards with nationwide dispatch and export capability.
+                Explore all 109 precision instruments and hospital supplies across 6 specialized divisions. Manufactured to ISO 13485:2016, CE Medical &amp; DRAP standards with nationwide dispatch and export capability.
               </p>
             </div>
 
@@ -150,11 +167,14 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         
         {/* Category Navigation Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-3 scrollbar-none mb-6">
+        <div className="flex items-center gap-2 overflow-x-auto pb-3 scrollbar-none mb-3">
           {categories.map((cat) => (
             <button
               key={cat.id}
-              onClick={() => setSelectedCategory(cat.id)}
+              onClick={() => {
+                setSelectedCategory(cat.id);
+                setSelectedSubcategory('all');
+              }}
               className={`px-5 py-2.5 rounded-full text-xs font-bold tracking-wider whitespace-nowrap shrink-0 transition cursor-pointer ${
                 selectedCategory === cat.id
                   ? 'bg-[#0f2a44] text-white font-black shadow-md'
@@ -165,6 +185,39 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
             </button>
           ))}
         </div>
+
+        {/* Subcategory Filter Pills */}
+        {subcategories.length > 1 && (
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-3 scrollbar-none mb-6">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 shrink-0 pl-1">
+              Subcategories:
+            </span>
+            <button
+              onClick={() => setSelectedSubcategory('all')}
+              className={`px-3 py-1 rounded-full text-[11px] font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer ${
+                selectedSubcategory === 'all'
+                  ? 'bg-cyan-700 text-white shadow-xs'
+                  : 'bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200'
+              }`}
+            >
+              All {selectedCategory === 'all' ? '' : 'Subcategories'}
+            </button>
+            {subcategories.map((subcat) => (
+              <button
+                key={subcat.name}
+                onClick={() => setSelectedSubcategory(subcat.name)}
+                className={`px-3 py-1 rounded-full text-[11px] font-medium whitespace-nowrap shrink-0 transition-all cursor-pointer ${
+                  selectedSubcategory === subcat.name
+                    ? 'bg-cyan-700 text-white font-bold shadow-xs'
+                    : 'bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200'
+                }`}
+              >
+                <span>{subcat.name}</span>
+                <span className="ml-1 text-[10px] opacity-75">({subcat.count})</span>
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Filter, Search & Pagination Info Bar */}
         <div className="bg-white rounded-2xl border border-slate-200 p-4 mb-8 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 shadow-2xs">

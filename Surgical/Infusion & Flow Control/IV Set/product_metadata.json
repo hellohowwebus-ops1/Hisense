@@ -1,0 +1,25 @@
+{
+  "id": "sanwa-surg-09",
+  "title": "IV Set",
+  "category": "Surgical",
+  "subcategory": "Infusion & Flow Control",
+  "price": "In Stock",
+  "currency": "PKR",
+  "sku": "STC-IV-SET",
+  "description": "Sterile non-pyrogenic IV infusion set with 20 drops/ml drip chamber and precise roller clamp.",
+  "attributes": {
+    "Tubing": "Medical Grade PVC, Kink-Resistant",
+    "Needle": "21G Hypodermic Needle"
+  },
+  "images": [
+    {
+      "filename": "image_01_highres.jpg",
+      "originalUrl": "https://www.sanwatradingcorporation.com/surgical-images/IV-Set.jpg",
+      "highResolutionSource": "https://www.sanwatradingcorporation.com/surgical-images/IV-Set.jpg",
+      "width": 2400,
+      "height": 2400
+    }
+  ],
+  "sourceUrl": "https://www.sanwatradingcorporation.com/surgical.html",
+  "exportedAt": "2026-11-12T06:40:08.783Z"
+}

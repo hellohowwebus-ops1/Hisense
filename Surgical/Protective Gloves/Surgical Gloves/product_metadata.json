@@ -1,0 +1,25 @@
+{
+  "id": "sanwa-surg-08",
+  "title": "Surgical Gloves",
+  "category": "Surgical",
+  "subcategory": "Protective Gloves",
+  "price": "In Stock",
+  "currency": "PKR",
+  "sku": "STC-SURG-GLV",
+  "description": "Sterile surgical gloves designed with anatomical curved fingers to reduce fatigue during operative procedures.",
+  "attributes": {
+    "Sterilization": "Gamma Radiation Sterile",
+    "Cuff": "Beaded Anti-Roll Cuff"
+  },
+  "images": [
+    {
+      "filename": "image_01_highres.jpg",
+      "originalUrl": "https://www.sanwatradingcorporation.com/surgical-images/Surgical-Gloves.png",
+      "highResolutionSource": "https://www.sanwatradingcorporation.com/surgical-images/Surgical-Gloves.png",
+      "width": 2400,
+      "height": 2400
+    }
+  ],
+  "sourceUrl": "https://www.sanwatradingcorporation.com/surgical.html",
+  "exportedAt": "2026-11-12T06:40:08.238Z"
+}

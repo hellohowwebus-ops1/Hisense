@@ -1,0 +1,25 @@
+{
+  "id": "sanwa-surg-04",
+  "title": "Examination Gloves (Pack of 100 Pcs)",
+  "category": "Surgical",
+  "subcategory": "Protective Gloves",
+  "price": "In Stock",
+  "currency": "PKR",
+  "sku": "STC-GLV-100",
+  "description": "High-tensile clinical examination gloves providing optimal grip and elasticity for medical procedures.",
+  "attributes": {
+    "Packaging": "Pack of 100 Pcs",
+    "Color": "Off-White Natural Latex"
+  },
+  "images": [
+    {
+      "filename": "image_01_highres.jpg",
+      "originalUrl": "https://www.sanwatradingcorporation.com/lab-images/examination-gloves.jpg",
+      "highResolutionSource": "https://www.sanwatradingcorporation.com/lab-images/examination-gloves.jpg",
+      "width": 2400,
+      "height": 2400
+    }
+  ],
+  "sourceUrl": "https://www.sanwatradingcorporation.com/surgical.html",
+  "exportedAt": "2026-11-12T06:40:04.076Z"
+}

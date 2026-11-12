@@ -1,0 +1,25 @@
+{
+  "id": "sanwa-surg-11",
+  "title": "Pusher",
+  "category": "Surgical",
+  "subcategory": "Instruments & Tools",
+  "price": "In Stock",
+  "currency": "PKR",
+  "sku": "STC-PUSH-01",
+  "description": "Stainless steel surgical pusher tool with knurled non-slip handle for clinical precision.",
+  "attributes": {
+    "Material": "Surgical Grade Stainless Steel (AISI 420)",
+    "Autoclavable": "Yes, Reusable & Sterilizable"
+  },
+  "images": [
+    {
+      "filename": "image_01_highres.jpg",
+      "originalUrl": "https://www.sanwatradingcorporation.com/surgical-images/Pusher.jpg",
+      "highResolutionSource": "https://www.sanwatradingcorporation.com/surgical-images/Pusher.jpg",
+      "width": 2400,
+      "height": 2400
+    }
+  ],
+  "sourceUrl": "https://www.sanwatradingcorporation.com/surgical.html",
+  "exportedAt": "2026-11-12T06:40:11.591Z"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "sanwa-surg-10",
+  "title": "DJ Stent",
+  "category": "Surgical",
+  "subcategory": "Urology & Implants",
+  "price": "In Stock",
+  "currency": "PKR",
+  "sku": "STC-DJ-STENT",
+  "description": "Double J polyurethane ureteral stent with hydrophilically coated surface for smooth urological placement.",
+  "attributes": {
+    "Material": "Radiopaque Polyurethane",
+    "Type": "Double Pigtail J-Stent"
+  },
+  "images": [
+    {
+      "filename": "image_01_highres.jpg",
+      "originalUrl": "https://www.sanwatradingcorporation.com/surgical-images/S%20DJ%20Stent.jpeg",
+      "highResolutionSource": "https://www.sanwatradingcorporation.com/surgical-images/S%20DJ%20Stent.jpeg",
+      "width": 2400,
+      "height": 2400
+    }
+  ],
+  "sourceUrl": "https://www.sanwatradingcorporation.com/surgical.html",
+  "exportedAt": "2026-11-12T06:40:10.087Z"
+}

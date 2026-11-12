@@ -5053,6 +5053,595 @@ export const PRODUCTS: Product[] = [
       "downloadPath": "/downloads/Hisense-Contraceptive-Range.zip",
       "badge": "DREIJET 3-Month"
   }
+,
+  {
+    "id": "hisense-6001",
+    "articleNo": "Hisense 6001",
+    "name": "Hisense 6001 \u00b7 Drap Sheet (Sterile Field Coverage)",
+    "category": "surgical-disposables",
+    "subcategory": "Sterile Sheets & Drapes",
+    "length": "Hospital Bed Size",
+    "shortDesc": "Sterile drap sheet designed to maintain a clean and contamination-free environment during medical and surgical procedures.",
+    "fullDesc": "Manufactured by Hisense International conforming to DRAP and hospital clinical requirements. Sterile drap sheet designed to maintain a clean, aseptic, and contamination-free barrier during medical, outpatient, and surgical procedures. Features high-barrier fluid resistance, tear prevention, and EO gas sterilization.",
+    "specifications": [
+      {
+        "label": "Article Number",
+        "value": "Hisense 6001 (STC-SURG-001)"
+      },
+      {
+        "label": "Sterility",
+        "value": "Sterile Packed (EO Gas)"
+      },
+      {
+        "label": "Application",
+        "value": "Hospital & Surgical Field Coverage"
+      },
+      {
+        "label": "Origin",
+        "value": "Hisense Certified Medical Grade"
+      },
+      {
+        "label": "Barrier Standard",
+        "value": "Fluid-Resistant Non-Woven"
+      }
+    ],
+    "features": [
+      "Sterile single-use hospital packaging",
+      "Impermeable fluid barrier protection",
+      "Lint-free hypoallergenic medical fabric",
+      "Lot-specific batch sterilization traceability"
+    ],
+    "certifications": [
+      "DRAP Registered",
+      "ISO 13485:2016",
+      "CE Medical Grade",
+      "ISO 9001:2015"
+    ],
+    "inStock": true,
+    "leadTime": "Immediate Dispatch",
+    "image": "/assets/images/products/surgical-disposables/drap-sheet.jpg",
+    "downloadPath": "/downloads/Hisense-Surgical-Disposables.zip",
+    "badge": "Sterile Drapes"
+  },
+  {
+    "id": "hisense-6002",
+    "articleNo": "Hisense 6002",
+    "name": "Hisense 6002 \u00b7 Dial Flow Regulator (IV Infusion)",
+    "category": "surgical-disposables",
+    "subcategory": "Infusion & Flow Control",
+    "length": "5 to 250 ml/hr",
+    "shortDesc": "Precision dial flow regulator for intravenous fluid administration with accurate calibration.",
+    "fullDesc": "High-accuracy intravenous infusion dial flow regulator engineered for reliable micro-rate fluid administration in surgical wards and ICUs. Features a dual-scale calibration dial from 5 to 250 ml/hr, universal Luer-lock male/female connectors, and kink-free medical tubing.",
+    "specifications": [
+      {
+        "label": "Article Number",
+        "value": "Hisense 6002 (STC-SURG-002)"
+      },
+      {
+        "label": "Calibration Range",
+        "value": "5 to 250 ml/hr Continuous Dial"
+      },
+      {
+        "label": "Compatibility",
+        "value": "Universal Luer-Lock Connectors"
+      },
+      {
+        "label": "Tubing Material",
+        "value": "Medical-Grade Non-Toxic PVC"
+      },
+      {
+        "label": "Sterility",
+        "value": "Ethylene Oxide (EO) Sterilized"
+      }
+    ],
+    "features": [
+      "Precise fluid delivery rate adjustment",
+      "Clear ergonomic graduated numerical dial",
+      "Universal fit with standard IV sets",
+      "Eliminates gravity roller clamp inaccuracy"
+    ],
+    "certifications": [
+      "DRAP Registered",
+      "ISO 13485:2016",
+      "CE Medical Grade",
+      "ISO 9001:2015"
+    ],
+    "inStock": true,
+    "leadTime": "Immediate Dispatch",
+    "image": "/assets/images/products/surgical-disposables/dial-flow-regulator.jpg",
+    "downloadPath": "/downloads/Hisense-Surgical-Disposables.zip",
+    "badge": "Infusion Control"
+  },
+  {
+    "id": "hisense-6003",
+    "articleNo": "Hisense 6003",
+    "name": "Hisense 6003 \u00b7 Examination Gloves Powder Free (Pack of 100)",
+    "category": "surgical-disposables",
+    "subcategory": "Protective Gloves",
+    "length": "Ambidextrous Fit",
+    "shortDesc": "Premium medical grade nitrile powder-free examination gloves offering superior barrier protection and tactile sensitivity.",
+    "fullDesc": "Engineered for diagnostic, clinical, and laboratory barrier defense. Powder-free formulation eliminates cornstarch allergen exposure and chemical irritation. Features micro-textured fingertips for secure wet and dry instrument grip with high puncture resistance.",
+    "specifications": [
+      {
+        "label": "Article Number",
+        "value": "Hisense 6003 (STC-GLV-PF100)"
+      },
+      {
+        "label": "Packaging",
+        "value": "Box of 100 Pcs (50 Pairs)"
+      },
+      {
+        "label": "Type",
+        "value": "Powder-Free Nitrile / Latex-Free"
+      },
+      {
+        "label": "Surface Finish",
+        "value": "Micro-Textured Fingertips"
+      },
+      {
+        "label": "Tensile Strength",
+        "value": ">= 18 MPa High Elasticity"
+      }
+    ],
+    "features": [
+      "100% Powder-free and hypoallergenic",
+      "Enhanced barrier against bloodborne pathogens",
+      "Optimal tactile sensitivity for delicate procedures",
+      "Beaded cuff for easy donning and anti-roll down"
+    ],
+    "certifications": [
+      "DRAP Registered",
+      "ISO 13485:2016",
+      "CE Class I Medical",
+      "EN 455 Tested"
+    ],
+    "inStock": true,
+    "leadTime": "Immediate Dispatch",
+    "image": "/assets/images/products/surgical-disposables/examination-gloves-powder-free.jpg",
+    "downloadPath": "/downloads/Hisense-Surgical-Disposables.zip",
+    "badge": "Powder-Free Gloves"
+  },
+  {
+    "id": "hisense-6004",
+    "articleNo": "Hisense 6004",
+    "name": "Hisense 6004 \u00b7 Examination Gloves Natural Latex (Pack of 100)",
+    "category": "surgical-disposables",
+    "subcategory": "Protective Gloves",
+    "length": "Beaded Cuff Fit",
+    "shortDesc": "High-tensile clinical examination gloves providing optimal grip and elasticity for medical procedures.",
+    "fullDesc": "High-tensile natural rubber latex clinical examination gloves providing second-skin comfort, high elasticity, and tear resistance during routine patient examinations and sample handling. Fully compliant with ASTM and EN 455 healthcare guidelines.",
+    "specifications": [
+      {
+        "label": "Article Number",
+        "value": "Hisense 6004 (STC-GLV-100)"
+      },
+      {
+        "label": "Packaging",
+        "value": "Box of 100 Pcs (50 Pairs)"
+      },
+      {
+        "label": "Material",
+        "value": "Premium Natural Rubber Latex"
+      },
+      {
+        "label": "Color",
+        "value": "Off-White Natural Finish"
+      },
+      {
+        "label": "Cuff Style",
+        "value": "Reinforced Beaded Cuff"
+      }
+    ],
+    "features": [
+      "Anatomical elasticity reducing hand fatigue",
+      "Smooth finish with textured palm grip",
+      "Low protein content to minimize sensitivity",
+      "Rigorous pinhole AQL 1.5 testing standard"
+    ],
+    "certifications": [
+      "DRAP Registered",
+      "ISO 13485:2016",
+      "CE Class I Medical",
+      "EN 455 Compliant"
+    ],
+    "inStock": true,
+    "leadTime": "Immediate Dispatch",
+    "image": "/assets/images/products/surgical-disposables/examination-gloves-latex.jpg",
+    "downloadPath": "/downloads/Hisense-Surgical-Disposables.zip",
+    "badge": "Latex Examination"
+  },
+  {
+    "id": "hisense-6005",
+    "articleNo": "Hisense 6005",
+    "name": "Hisense 6005 \u00b7 Nebulizer Mask Kit with Chamber (Adult)",
+    "category": "surgical-disposables",
+    "subcategory": "Respiratory & Inhalation",
+    "length": "2m Tubing + Mask",
+    "shortDesc": "Ergonomic adult aerosol nebulizer mask complete with kink-resistant oxygen tubing and medication cup.",
+    "fullDesc": "Clinical aerosol inhalation therapy kit designed for efficient medication atomization in adult respiratory care. Includes a soft contoured transparent PVC mask with adjustable aluminum nose clip, an anti-spill 6ml medication cup, and a 200cm star-lumen kink-resistant oxygen supply tube.",
+    "specifications": [
+      {
+        "label": "Article Number",
+        "value": "Hisense 6005 (STC-NEB-AD)"
+      },
+      {
+        "label": "Size",
+        "value": "Adult Ergonomic Universal Fit"
+      },
+      {
+        "label": "Tubing Length",
+        "value": "2.0 Meters (Star-Lumen Kink-Resistant)"
+      },
+      {
+        "label": "Chamber Capacity",
+        "value": "6 ml Medication Cup"
+      },
+      {
+        "label": "Material",
+        "value": "Medical Grade Latex-Free Clear PVC"
+      }
+    ],
+    "features": [
+      "Fine aerosol particle output for rapid lung absorption",
+      "Soft feathered edges for comfortable facial seal",
+      "Swivel connector for multi-angle patient posture",
+      "Latex-free and biocompatible medical materials"
+    ],
+    "certifications": [
+      "DRAP Registered",
+      "ISO 13485:2016",
+      "CE Medical Device",
+      "ISO 9001:2015"
+    ],
+    "inStock": true,
+    "leadTime": "Immediate Dispatch",
+    "image": "/assets/images/products/surgical-disposables/nebulizer-mask-kit-adult.jpg",
+    "downloadPath": "/downloads/Hisense-Surgical-Disposables.zip",
+    "badge": "Respiratory Care"
+  },
+  {
+    "id": "hisense-6006",
+    "articleNo": "Hisense 6006",
+    "name": "Hisense 6006 \u00b7 Dignity Sheet Absorbent Underpad (Pack of 10)",
+    "category": "surgical-disposables",
+    "subcategory": "Sterile Sheets & Drapes",
+    "length": "60 x 90 cm",
+    "shortDesc": "Multi-layer absorbent underpad dignity sheet with waterproof backing to protect surgical and examination beds.",
+    "fullDesc": "Heavy-duty multi-layer medical underpad dignity sheet featuring super absorbent polymer (SAP) core, diamond-embossed surface for rapid liquid dispersion, and a leakproof polyethylene blue backing. Protects OT tables, patient beds, and examination couches.",
+    "specifications": [
+      {
+        "label": "Article Number",
+        "value": "Hisense 6006 (STC-DIG-10)"
+      },
+      {
+        "label": "Packaging",
+        "value": "Pack of 10 Pcs Heavy-Duty"
+      },
+      {
+        "label": "Absorbent Core",
+        "value": "Fluff Pulp + Super Absorbent Polymer"
+      },
+      {
+        "label": "Backing Sheet",
+        "value": "Waterproof Polyethylene Non-Skid"
+      },
+      {
+        "label": "Dimensions",
+        "value": "60 cm x 90 cm Full Bed Protection"
+      }
+    ],
+    "features": [
+      "Ultra-absorbent core locks in fluids and odors",
+      "Soft non-woven top sheet gentle on skin",
+      "Diamond embossing channels fluid away from surface",
+      "Non-slip moisture barrier prevents bed contamination"
+    ],
+    "certifications": [
+      "DRAP Registered",
+      "ISO 13485:2016",
+      "CE Medical Grade",
+      "ISO 9001:2015"
+    ],
+    "inStock": true,
+    "leadTime": "Immediate Dispatch",
+    "image": "/assets/images/products/surgical-disposables/dignity-sheet.png",
+    "downloadPath": "/downloads/Hisense-Surgical-Disposables.zip",
+    "badge": "Absorbent Underpad"
+  },
+  {
+    "id": "hisense-6007",
+    "articleNo": "Hisense 6007",
+    "name": "Hisense 6007 \u00b7 Three-Way Stopcock / Stopper (360\u00b0 Rotation)",
+    "category": "surgical-disposables",
+    "subcategory": "Infusion & Flow Control",
+    "length": "Universal Luer",
+    "shortDesc": "Medical CE certified 3-way stopcock with 360-degree rotation for simultaneous intravenous infusion.",
+    "fullDesc": "Precision-molded 3-way stopcock valve designed for multi-line intravenous fluid administration, drug titration, and pressure monitoring. Features a transparent lipid-resistant polycarbonate body, color-coded rotating tap handle, and dual female Luer ports with male Luer lock.",
+    "specifications": [
+      {
+        "label": "Article Number",
+        "value": "Hisense 6007 (STC-3WAY-01)"
+      },
+      {
+        "label": "Rotation",
+        "value": "Full 360-Degree Smooth Handle"
+      },
+      {
+        "label": "Pressure Rating",
+        "value": "Up to 4.5 bar (65 psi) Leak-Proof"
+      },
+      {
+        "label": "Port Configuration",
+        "value": "2 Female Luer + 1 Male Luer-Lock"
+      },
+      {
+        "label": "Body Material",
+        "value": "Lipid-Resistant Medical Polycarbonate"
+      }
+    ],
+    "features": [
+      "Zero dead-space design prevents medication loss",
+      "Transparent body allows bubble and flow inspection",
+      "Withstands lipid and intravenous medication infusions",
+      "Smooth tactile rotation with clear flow path arrows"
+    ],
+    "certifications": [
+      "DRAP Registered",
+      "ISO 13485:2016",
+      "CE 0123 Certified",
+      "ISO 9001:2015"
+    ],
+    "inStock": true,
+    "leadTime": "Immediate Dispatch",
+    "image": "/assets/images/products/surgical-disposables/three-way-stopper.jpg",
+    "downloadPath": "/downloads/Hisense-Surgical-Disposables.zip",
+    "badge": "3-Way Stopcock"
+  },
+  {
+    "id": "hisense-6008",
+    "articleNo": "Hisense 6008",
+    "name": "Hisense 6008 \u00b7 Sterile Surgical Gloves (Gamma Sterilized)",
+    "category": "surgical-disposables",
+    "subcategory": "Protective Gloves",
+    "length": "Size 7.5 Anatomical",
+    "shortDesc": "Sterile surgical gloves designed with anatomical curved fingers to reduce fatigue during operative procedures.",
+    "fullDesc": "Gamma-radiation sterilized surgical gloves individually pair-packed in sterile inner wallet and peel-open peel pouches. Anatomically curved finger design mimics natural hand posture to reduce muscle strain during multi-hour surgical operations.",
+    "specifications": [
+      {
+        "label": "Article Number",
+        "value": "Hisense 6008 (STC-SURG-GLV)"
+      },
+      {
+        "label": "Sterilization",
+        "value": "Gamma Radiation (Cobalt 60) Sterile"
+      },
+      {
+        "label": "Design",
+        "value": "Anatomical Curved Fingers, Right & Left Hand"
+      },
+      {
+        "label": "Cuff Type",
+        "value": "Beaded Anti-Roll Operating Cuff"
+      },
+      {
+        "label": "Pinhole AQL",
+        "value": "AQL 0.65 Micro-Inspection Standard"
+      }
+    ],
+    "features": [
+      "Rigorous sterility assurance level (SAL 10^-6)",
+      "Anatomical shape reduces hand fatigue during long surgeries",
+      "Micro-roughened palm finish for slippery instrument grip",
+      "Extra-long cuff protects gown wrist seams"
+    ],
+    "certifications": [
+      "DRAP Registered",
+      "ISO 13485:2016",
+      "CE 0197 Medical",
+      "EN 455 / ASTM D3577"
+    ],
+    "inStock": true,
+    "leadTime": "Immediate Dispatch",
+    "image": "/assets/images/products/surgical-disposables/surgical-gloves.png",
+    "downloadPath": "/downloads/Hisense-Surgical-Disposables.zip",
+    "badge": "Sterile Surgical"
+  },
+  {
+    "id": "hisense-6009",
+    "articleNo": "Hisense 6009",
+    "name": "Hisense 6009 \u00b7 IV Infusion Set with Air Vent & Drip Chamber",
+    "category": "surgical-disposables",
+    "subcategory": "Infusion & Flow Control",
+    "length": "150 cm Tubing",
+    "shortDesc": "Sterile non-pyrogenic IV infusion set with 20 drops/ml drip chamber and precise roller clamp.",
+    "fullDesc": "Sterile, single-use, non-pyrogenic intravenous gravity infusion set for clinical and hospital fluid administration. Features a sharp piercing spike with bacterial air vent, transparent 20 drops/ml drip chamber with integrated 15-micron fluid filter, smooth roller clamp, and latex-free Y-injection site.",
+    "specifications": [
+      {
+        "label": "Article Number",
+        "value": "Hisense 6009 (STC-IV-SET)"
+      },
+      {
+        "label": "Drop Factor",
+        "value": "20 Drops / ml Distilled Water"
+      },
+      {
+        "label": "Filter Rating",
+        "value": "15-Micron Internal Liquid Filter"
+      },
+      {
+        "label": "Needle",
+        "value": "21G Hypodermic Precision Needle"
+      },
+      {
+        "label": "Tubing",
+        "value": "150 cm Medical-Grade Kink-Free PVC"
+      }
+    ],
+    "features": [
+      "Hydrophobic bacterial air vent filter",
+      "Clear cylindrical drip chamber for drop counting",
+      "Precision roller clamp for stable flow control",
+      "Latex-free self-sealing extra injection site"
+    ],
+    "certifications": [
+      "DRAP Registered",
+      "ISO 13485:2016",
+      "CE Medical Grade",
+      "ISO 8536-4 Compliant"
+    ],
+    "inStock": true,
+    "leadTime": "Immediate Dispatch",
+    "image": "/assets/images/products/surgical-disposables/iv-set.jpg",
+    "downloadPath": "/downloads/Hisense-Surgical-Disposables.zip",
+    "badge": "Infusion Set"
+  },
+  {
+    "id": "hisense-6010",
+    "articleNo": "Hisense 6010",
+    "name": "Hisense 6010 \u00b7 DJ Ureteral Stent (Double J Hydrophilic)",
+    "category": "surgical-disposables",
+    "subcategory": "Urology & Implants",
+    "length": "6 Fr / 26 cm",
+    "shortDesc": "Double J polyurethane ureteral stent with hydrophilically coated surface for smooth urological placement.",
+    "fullDesc": "Urological implant stent engineered from radiopaque biocompatible polyurethane with lubricious hydrophilic coating for smooth passage over guidewires. Features dual pigtail retention coils to prevent migration, high drainage lumen, and centimetre graduation markers.",
+    "specifications": [
+      {
+        "label": "Article Number",
+        "value": "Hisense 6010 (STC-DJ-STENT)"
+      },
+      {
+        "label": "Size & Length",
+        "value": "6 Fr Diameter / 26 cm Working Length"
+      },
+      {
+        "label": "Material",
+        "value": "Radiopaque Medical-Grade Polyurethane"
+      },
+      {
+        "label": "Coating",
+        "value": "Hydrophilic Lubricious Coating"
+      },
+      {
+        "label": "Configuration",
+        "value": "Double Pigtail J-Stent with Push Catheter"
+      }
+    ],
+    "features": [
+      "Smooth hydrophilic surface minimizes encrustation",
+      "Radiopaque composition for precise X-Ray and fluoroscopy visualization",
+      "Multiple side drainage eyelets ensure continuous urine flow",
+      "Tapered atraumatic pigtail coils prevent tissue trauma"
+    ],
+    "certifications": [
+      "DRAP Registered",
+      "ISO 13485:2016",
+      "CE 0123 Certified",
+      "ISO 9001:2015"
+    ],
+    "inStock": true,
+    "leadTime": "Immediate Dispatch",
+    "image": "/assets/images/products/surgical-disposables/dj-stent.jpg",
+    "downloadPath": "/downloads/Hisense-Surgical-Disposables.zip",
+    "badge": "Urology Stent"
+  },
+  {
+    "id": "hisense-6011",
+    "articleNo": "Hisense 6011",
+    "name": "Hisense 6011 \u00b7 Surgical Pusher & Guiding Tool",
+    "category": "surgical-disposables",
+    "subcategory": "Instruments & Tools",
+    "length": "18.0 cm",
+    "shortDesc": "Stainless steel surgical pusher tool with knurled non-slip handle for clinical precision.",
+    "fullDesc": "High-precision surgical pusher and catheter guiding instrument forged from hardened AISI 420 surgical stainless steel. Designed for smooth stent positioning, ligature guidance, and tissue advancement without traumatic displacement. Fully autoclavable and corrosion passivated.",
+    "specifications": [
+      {
+        "label": "Article Number",
+        "value": "Hisense 6011 (STC-PUSH-01)"
+      },
+      {
+        "label": "Material",
+        "value": "Surgical Stainless Steel AISI 420"
+      },
+      {
+        "label": "Working Length",
+        "value": "18.0 cm (7.1 inches)"
+      },
+      {
+        "label": "Surface",
+        "value": "Passivated Satin Matte Finish"
+      },
+      {
+        "label": "Autoclavable",
+        "value": "134\u00b0C Class-B Autoclave Compatible"
+      }
+    ],
+    "features": [
+      "Atraumatic tip design prevents vessel / catheter perforation",
+      "Knurled diamond-texture ergonomic finger grip",
+      "High torsional rigidity for controlled maneuverability",
+      "Reusable, ultrasonic-cleanable, and steam sterilizable"
+    ],
+    "certifications": [
+      "DRAP Registered",
+      "ISO 13485:2016",
+      "CE Medical Grade",
+      "ISO 7153-1 Compliant"
+    ],
+    "inStock": true,
+    "leadTime": "Immediate Dispatch",
+    "image": "/assets/images/products/surgical-disposables/pusher.jpg",
+    "downloadPath": "/downloads/Hisense-Surgical-Disposables.zip",
+    "badge": "Surgical Pusher"
+  },
+  {
+    "id": "hisense-6012",
+    "articleNo": "Hisense 6012",
+    "name": "Hisense 6012 \u00b7 Disposable Syringe with Needle (Luer Lock 5ml)",
+    "category": "surgical-disposables",
+    "subcategory": "Syringes & Injections",
+    "length": "5 ml / 23G Needle",
+    "shortDesc": "High-transparency 3-part sterile disposable syringe with ultra-fine stainless steel cannula.",
+    "fullDesc": "Clinical 3-part disposable syringe featuring ultra-clear polypropylene barrel with permanent bold black graduation markings, smooth silicone-lubricated medical rubber plunger seal, secure Luer-lock tip, and sharp 23G x 1.25 inch siliconized stainless steel needle. EO gas sterile.",
+    "specifications": [
+      {
+        "label": "Article Number",
+        "value": "Hisense 6012 (STC-INJ-DISP)"
+      },
+      {
+        "label": "Volume Capacity",
+        "value": "5.0 ml with 0.2 ml Graduation"
+      },
+      {
+        "label": "Type",
+        "value": "3-Part with Rubber Gasket Seal"
+      },
+      {
+        "label": "Needle Size",
+        "value": "23G x 1.25 inch (0.6 x 32mm)"
+      },
+      {
+        "label": "Sterilization",
+        "value": "Ethylene Oxide (EO) Gas Sterile"
+      }
+    ],
+    "features": [
+      "Crystal clear barrel for accurate dose measurement",
+      "Latex-free synthetic gasket ensures smooth plunger movement",
+      "Plunger retaining ring prevents accidental pull-out",
+      "Ultra-thin wall siliconized needle for pain-minimized injection"
+    ],
+    "certifications": [
+      "DRAP Registered",
+      "ISO 13485:2016",
+      "CE Class IIa Medical",
+      "ISO 7886-1 Standard"
+    ],
+    "inStock": true,
+    "leadTime": "Immediate Dispatch",
+    "image": "/assets/images/products/surgical-disposables/disposable-injection.jpg",
+    "downloadPath": "/downloads/Hisense-Surgical-Disposables.zip",
+    "badge": "Disposable Syringe"
+  }
 ];
 
 export const BRAND_POSTS: BrandPost[] = [
@@ -5175,12 +5764,13 @@ export const COMPANY_DETAILS = {
 export const getMixedProducts = (allProducts: Product[]): Product[] => {
   const contraceptive = allProducts.filter((p) => p.category === 'contraceptive-range');
   const surgical = allProducts.filter((p) => p.category === 'surgical-instruments');
+  const disposables = allProducts.filter((p) => p.category === 'surgical-disposables');
   const dental = allProducts.filter((p) => p.category === 'dental-instruments');
   const barber = allProducts.filter((p) => p.category === 'barber-salon-shears');
   const beauty = allProducts.filter((p) => p.category === 'beauty-nail-care');
   const others = allProducts.filter(
     (p) =>
-      !['contraceptive-range', 'surgical-instruments', 'dental-instruments', 'barber-salon-shears', 'beauty-nail-care'].includes(
+      !['contraceptive-range', 'surgical-instruments', 'surgical-disposables', 'dental-instruments', 'barber-salon-shears', 'beauty-nail-care'].includes(
         p.category
       )
   );
@@ -5188,24 +5778,28 @@ export const getMixedProducts = (allProducts: Product[]): Product[] => {
   const mixed: Product[] = [];
   let ci = 0;
   let si = 0;
+  let sdi = 0;
   let di = 0;
   let bai = 0;
   let bei = 0;
 
-  // Interleave in waves of 6 matching the grid layout (1 contraceptive, 1 surgical, 1 dental, 1 barber, 1 beauty, 1 surgical)
+  // Interleave in waves matching the 4-column x 2-row grid so the home page exhibits a rich cross-division blend
   while (
     ci < contraceptive.length ||
     si < surgical.length ||
+    sdi < disposables.length ||
     di < dental.length ||
     bai < barber.length ||
     bei < beauty.length
   ) {
-    if (ci < contraceptive.length) mixed.push(contraceptive[ci++]);
     if (si < surgical.length) mixed.push(surgical[si++]);
+    if (sdi < disposables.length) mixed.push(disposables[sdi++]);
+    if (ci < contraceptive.length) mixed.push(contraceptive[ci++]);
     if (di < dental.length) mixed.push(dental[di++]);
     if (bai < barber.length) mixed.push(barber[bai++]);
     if (bei < beauty.length) mixed.push(beauty[bei++]);
     if (si < surgical.length) mixed.push(surgical[si++]);
+    if (sdi < disposables.length) mixed.push(disposables[sdi++]);
   }
 
   others.forEach((p) => mixed.push(p));

@@ -38,6 +38,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
   isCompactHome = true,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>(propCategory || 'all');
+  const [selectedSubcategory, setSelectedSubcategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(isCompactHome ? 8 : 16);
@@ -45,24 +46,27 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
   useEffect(() => {
     if (propCategory && propCategory !== selectedCategory) {
       setSelectedCategory(propCategory);
+      setSelectedSubcategory('all');
     }
   }, [propCategory]);
 
-  // Reset to page 1 whenever category or search query changes
+  // Reset to page 1 whenever category, subcategory, or search query changes
   useEffect(() => {
     setCurrentPage(1);
-  }, [selectedCategory, searchQuery, itemsPerPage]);
+  }, [selectedCategory, selectedSubcategory, searchQuery, itemsPerPage]);
 
   const handleSelectCategory = (catId: string) => {
     setSelectedCategory(catId);
+    setSelectedSubcategory('all');
     if (onCategoryChange) {
       onCategoryChange(catId);
     }
   };
 
   const categories = [
-    { id: 'all', label: 'ALL PRODUCTS (97)', zip: '/downloads/Hisense-Complete-Catalog.zip' },
+    { id: 'all', label: 'ALL PRODUCTS (109)', zip: '/downloads/Hisense-Complete-Catalog.zip' },
     { id: 'surgical-instruments', label: 'SURGICAL INSTRUMENTS (49)', zip: '/downloads/Hisense-Surgical-Instruments.zip' },
+    { id: 'surgical-disposables', label: 'SURGICAL DISPOSABLES (12)', zip: '/downloads/Hisense-Surgical-Disposables.zip' },
     { id: 'contraceptive-range', label: 'CONTRACEPTIVE RANGE (18)', zip: '/downloads/Hisense-Contraceptive-Range.zip' },
     { id: 'dental-instruments', label: 'DENTAL INSTRUMENTS (10)', zip: '/downloads/Hisense-Dental-Instruments.zip' },
     { id: 'beauty-nail-care', label: 'BEAUTY & NAIL CARE (10)', zip: '/downloads/Hisense-Beauty-Nail-Care.zip' },
@@ -71,18 +75,33 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
 
   const currentCategoryObj = categories.find((c) => c.id === selectedCategory) || categories[0];
 
-  // In 'all' view, use the balanced interleaved MIXED_PRODUCTS so the home page presents a diverse mix of all 5 divisions
+  // Compute available subcategories for the current category selection
+  const subcategories = React.useMemo(() => {
+    const pool = selectedCategory === 'all' 
+      ? PRODUCTS 
+      : PRODUCTS.filter((p) => p.category === selectedCategory);
+    const counts: { [key: string]: number } = {};
+    pool.forEach((p) => {
+      if (p.subcategory) {
+        counts[p.subcategory] = (counts[p.subcategory] || 0) + 1;
+      }
+    });
+    return Object.entries(counts).map(([name, count]) => ({ name, count }));
+  }, [selectedCategory]);
+
+  // In 'all' view, use the balanced interleaved MIXED_PRODUCTS so the home page presents a diverse mix of all 6 divisions
   // When a specific category is clicked, use PRODUCTS to display that category's instruments in clean sequence
   const sourceProducts = selectedCategory === 'all' ? MIXED_PRODUCTS : PRODUCTS;
 
   const filteredProducts = sourceProducts.filter((p) => {
     const matchesCat = selectedCategory === 'all' || p.category === selectedCategory;
+    const matchesSubcat = selectedSubcategory === 'all' || p.subcategory === selectedSubcategory;
     const matchesSearch =
       p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.articleNo.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.shortDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.subcategory.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCat && matchesSearch;
+    return matchesCat && matchesSubcat && matchesSearch;
   });
 
   // Calculate pagination
@@ -136,17 +155,17 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
           <div>
             <div className="flex flex-wrap items-center gap-2 mb-2">
               <span className="text-xs font-mono font-bold tracking-widest uppercase text-cyan-700 bg-cyan-50 border border-cyan-200 px-2.5 py-0.5 rounded-full">
-                HISENSE 5 CORE MANUFACTURING &amp; SUPPLY LINES
+                HISENSE 6 CORE MANUFACTURING &amp; SUPPLY LINES
               </span>
               <span className="text-xs font-mono text-slate-500">
-                • {totalItems} Certified Instruments
+                • {totalItems} Certified Instruments &amp; Supplies
               </span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0f2a44] tracking-tight uppercase">
               Instruments &amp; Precision Tools
             </h2>
             <p className="text-slate-600 text-xs sm:text-sm mt-2 max-w-3xl font-normal">
-              Organized into 5 specialized divisions: <strong className="text-slate-800">Contraceptive Range</strong>, <strong className="text-slate-800">Surgical Instruments</strong>, <strong className="text-slate-800">Dental Instruments</strong>, <strong className="text-slate-800">Beauty &amp; Nail Care</strong>, and <strong className="text-slate-800">Barber &amp; Salon Hair Shears</strong>.
+              Organized into 6 specialized divisions: <strong className="text-slate-800">Surgical Instruments</strong>, <strong className="text-slate-800">Surgical Disposables</strong>, <strong className="text-slate-800">Contraceptive Range</strong>, <strong className="text-slate-800">Dental Instruments</strong>, <strong className="text-slate-800">Beauty &amp; Nail Care</strong>, and <strong className="text-slate-800">Barber &amp; Salon Hair Shears</strong>.
             </p>
           </div>
 
@@ -167,7 +186,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
         </div>
 
         {/* Category Filter Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-3 scrollbar-none mb-6">
+        <div className="flex items-center gap-2 overflow-x-auto pb-3 scrollbar-none mb-3">
           {categories.map((cat) => (
             <button
               key={cat.id}
@@ -182,6 +201,40 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
             </button>
           ))}
         </div>
+
+        {/* Subcategory Filter Pills */}
+        {subcategories.length > 1 && (
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-3 scrollbar-none mb-5">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 shrink-0 flex items-center gap-1 pl-1">
+              <ListFilter className="w-3.5 h-3.5 text-cyan-600" />
+              Subcategories:
+            </span>
+            <button
+              onClick={() => setSelectedSubcategory('all')}
+              className={`px-3 py-1 rounded-full text-[11px] font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer ${
+                selectedSubcategory === 'all'
+                  ? 'bg-cyan-700 text-white shadow-xs'
+                  : 'bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200'
+              }`}
+            >
+              All {selectedCategory === 'all' ? '' : 'Subcategories'}
+            </button>
+            {subcategories.map((subcat) => (
+              <button
+                key={subcat.name}
+                onClick={() => setSelectedSubcategory(subcat.name)}
+                className={`px-3 py-1 rounded-full text-[11px] font-medium whitespace-nowrap shrink-0 transition-all cursor-pointer ${
+                  selectedSubcategory === subcat.name
+                    ? 'bg-cyan-700 text-white font-bold shadow-xs'
+                    : 'bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200'
+                }`}
+              >
+                <span>{subcat.name}</span>
+                <span className="ml-1 text-[10px] opacity-75">({subcat.count})</span>
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Top Control Bar: Showing X of Y, Per-Page Options, and Next Page Quick Jump */}
         <div id="products-grid-top" className="flex flex-wrap items-center justify-between gap-4 py-3 px-4 bg-white rounded-2xl border border-slate-200 mb-6 shadow-2xs">

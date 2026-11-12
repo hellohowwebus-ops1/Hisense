@@ -1,0 +1,25 @@
+{
+  "id": "sanwa-surg-07",
+  "title": "Three Way Stopper China",
+  "category": "Surgical",
+  "subcategory": "Infusion & Flow Control",
+  "price": "In Stock",
+  "currency": "PKR",
+  "sku": "STC-3WAY-01",
+  "description": "Medical CE certified 3-way stopcock with 360-degree rotation for simultaneous intravenous infusion.",
+  "attributes": {
+    "Certification": "CE Certified",
+    "PressureRating": "Up to 4.5 bar (65 psi)"
+  },
+  "images": [
+    {
+      "filename": "image_01_highres.jpg",
+      "originalUrl": "https://www.sanwatradingcorporation.com/lab-images/Three-Way-Stopper.jpg",
+      "highResolutionSource": "https://www.sanwatradingcorporation.com/lab-images/Three-Way-Stopper.jpg",
+      "width": 2400,
+      "height": 2400
+    }
+  ],
+  "sourceUrl": "https://www.sanwatradingcorporation.com/surgical.html",
+  "exportedAt": "2026-11-12T06:40:07.237Z"
+}

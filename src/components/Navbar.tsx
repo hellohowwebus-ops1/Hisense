@@ -27,10 +27,18 @@ export const PRODUCT_MENU_CATEGORIES: ProductMenuCategory[] = [
   {
     id: 'surgical-instruments',
     name: 'Surgical Instruments',
-    articleRange: 'Hisense 1001 – 1705',
+    articleRange: 'Hisense 1001 – 1049',
     desc: 'Operating scissors, hemostats, forceps, retractors & scalpels',
     badge: 'AISI 420 Surgical',
     zip: '/downloads/Hisense-Surgical-Instruments.zip',
+  },
+  {
+    id: 'surgical-disposables',
+    name: 'Surgical & Hospital Disposables',
+    articleRange: 'Hisense 6001 – 6012',
+    desc: 'Sterile drapes, IV sets, flow regulators, gloves, syringes & stents',
+    badge: 'Hospital Supplies',
+    zip: '/downloads/Hisense-Surgical-Disposables.zip',
   },
   {
     id: 'contraceptive-range',
@@ -228,10 +236,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <div>
                       <div className="text-[10px] font-mono font-bold tracking-widest text-cyan-800 uppercase flex items-center gap-1.5">
                         <Scissors className="w-3.5 h-3.5 text-cyan-600" />
-                        HISENSE 5 CORE PRODUCT DIVISIONS
+                        HISENSE 6 CORE PRODUCT DIVISIONS
                       </div>
                       <div className="text-sm font-black text-[#0f2a44] tracking-tight">
-                        Contraceptive, Surgical, Dental, Beauty &amp; Barber Salon Instruments
+                        Surgical, Hospital Disposables, Contraceptives, Dental, Beauty &amp; Barber Salon Instruments
                       </div>
                     </div>
                   </div>
@@ -410,7 +418,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={() => setMobileProductsExpanded(!mobileProductsExpanded)}
                 className="w-full flex items-center justify-between text-left py-1.5 text-cyan-800 font-black cursor-pointer"
               >
-                <span>PRODUCT CATEGORIES (4 DIVISIONS)</span>
+                <span>PRODUCT CATEGORIES (6 DIVISIONS)</span>
                 <ChevronDown className={`w-4 h-4 transition-transform ${mobileProductsExpanded ? 'rotate-180' : ''}`} />
               </button>
 
