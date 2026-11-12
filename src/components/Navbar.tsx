@@ -244,27 +244,21 @@ export const Navbar: React.FC<NavbarProps> = ({
                         className="p-3 rounded-xl text-left bg-slate-50/70 hover:bg-slate-100/90 transition border border-slate-200/80 hover:border-cyan-400 group flex flex-col justify-between"
                       >
                         <div>
-                          <div className="flex items-center justify-between mb-1">
-                            <button
-                              onClick={() => handleCategoryClick(cat.id, true)}
-                              className="text-xs font-black text-slate-900 group-hover:text-cyan-700 transition cursor-pointer text-left"
-                            >
-                              {cat.name}
-                            </button>
-                            <span className="text-[9px] font-mono text-cyan-800 bg-cyan-100/80 border border-cyan-200 px-1.5 py-0.5 rounded-full font-bold">
-                              {cat.articleRange}
-                            </span>
-                          </div>
-                          <p className="text-[11px] text-slate-600 line-clamp-2 mt-0.5 font-normal">
+                          <button
+                            onClick={() => handleCategoryClick(cat.id, true)}
+                            className="text-xs font-black text-slate-900 group-hover:text-cyan-700 transition cursor-pointer text-left block mb-1"
+                          >
+                            {cat.name}
+                          </button>
+                          <p className="text-[11px] text-slate-600 line-clamp-2 font-normal">
                             {cat.desc}
                           </p>
                         </div>
 
-                        <div className="flex items-center justify-between mt-2.5 pt-2 border-t border-slate-200/60 text-[10px]">
-                          <span className="font-mono text-slate-400">{cat.badge}</span>
+                        <div className="flex items-center justify-end mt-2.5 pt-2 border-t border-slate-200/60 text-[10px]">
                           <button
                             onClick={() => handleCategoryClick(cat.id, true)}
-                            className="text-cyan-700 font-bold hover:underline cursor-pointer flex items-center gap-0.5"
+                            className="text-cyan-700 font-bold hover:underline cursor-pointer flex items-center gap-1 group-hover:text-cyan-800"
                           >
                             <span>Explore Category</span>
                             <ArrowRight className="w-2.5 h-2.5" />
@@ -279,22 +273,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <div className="flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-cyan-600 animate-pulse" />
                       <span className="text-xs font-black text-[#0f2a44]">Contraceptives &amp; Family Planning</span>
-                      <span className="text-[10px] font-mono text-cyan-800 bg-cyan-100 px-1.5 py-0.5 rounded font-bold">Cu-T 380A • DMPA</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => handleNavClick('home', 'contraceptive-range')}
                         className="text-[11px] font-bold text-cyan-700 hover:text-cyan-900 cursor-pointer flex items-center gap-0.5"
                       >
-                        <span>Copper T 380A</span>
-                        <ArrowRight className="w-2.5 h-2.5" />
-                      </button>
-                      <span className="text-slate-300">|</span>
-                      <button
-                        onClick={() => handleNavClick('home', 'family-planning-programs')}
-                        className="text-[11px] font-bold text-cyan-700 hover:text-cyan-900 cursor-pointer flex items-center gap-0.5"
-                      >
-                        <span>Public Health</span>
+                        <span>Contraceptive Range</span>
                         <ArrowRight className="w-2.5 h-2.5" />
                       </button>
                     </div>
@@ -444,13 +429,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                       onClick={() => handleCategoryClick(cat.id)}
                       className="text-left py-1.5 px-2.5 rounded-lg hover:bg-slate-100 text-slate-800 font-semibold text-xs flex items-center justify-between cursor-pointer"
                     >
-                      <div>
-                        <div>{cat.name}</div>
-                        <div className="text-[10px] text-slate-500 font-normal">{cat.badge}</div>
-                      </div>
-                      <span className="text-[10px] font-mono text-cyan-800 bg-cyan-50 px-1.5 py-0.5 rounded font-bold">
-                        {cat.articleRange}
-                      </span>
+                      <span>{cat.name}</span>
+                      <ArrowRight className="w-3 h-3 text-slate-400" />
                     </button>
                   ))}
                 </div>

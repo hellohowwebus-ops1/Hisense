@@ -4,7 +4,6 @@ import { CorporateReliabilityTicker } from '../components/CorporateReliabilityTi
 import { ProductCatalog } from '../components/ProductCatalog';
 import { ContraceptiveShowcaseSection } from '../components/ContraceptiveShowcaseSection';
 import { ThreeDShowcase } from '../components/ThreeDShowcase';
-import { FamilyPlanningProgramSection } from '../components/FamilyPlanningProgramSection';
 import { BrandPostsSection } from '../components/BrandPostsSection';
 import { Product } from '../types';
 import { PRODUCTS } from '../data/mockData';
@@ -113,12 +112,6 @@ export const HomePage: React.FC<HomePageProps> = ({
         />
       </div>
 
-      {/* 5. DEDICATED CONTRACEPTIVE SECTION 02: National Family Planning, Hormonal & Barrier Contraceptives */}
-      <FamilyPlanningProgramSection
-        onOpenVideoModal={onOpenVideoModal}
-        onOpenRfq={onOpenRfq}
-        onAddToRfq={onAddToRfq}
-      />
 
       {/* 4. Clinical Functionality & Quality Assurance Pillars (Dark Theme matching #0f2a44) */}
       <section className="py-24 bg-[#0f2a44] text-white border-b border-cyan-950/80 relative overflow-hidden">

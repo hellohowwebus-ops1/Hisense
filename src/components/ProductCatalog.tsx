@@ -10,7 +10,6 @@ import {
   CheckCircle2,
   Sparkles,
   ArrowRight,
-  ArrowDown,
   ChevronLeft,
   ChevronRight,
   Grid3X3,
@@ -106,13 +105,6 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
     }
   };
 
-  const scrollToNextSection = () => {
-    const el = document.getElementById('3d-demo');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   // Generate pagination numbers array
   const getPageNumbers = () => {
     if (totalPages <= 7) {
@@ -158,10 +150,10 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
             </p>
           </div>
 
-          {/* Quick Actions: Search & Skip To Next Section */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto">
+          {/* Quick Search */}
+          <div className="w-full lg:w-80">
             {/* Search Box */}
-            <div className="relative flex-1 sm:w-72">
+            <div className="relative w-full">
               <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
@@ -171,26 +163,6 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                 className="w-full pl-10 pr-4 py-2.5 rounded-full bg-white border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-cyan-600 focus:ring-1 focus:ring-cyan-600 transition shadow-xs"
               />
             </div>
-
-            {/* Quick Skip Button for Users Not Wanting to Browse Products */}
-            {onNavigateToProductsPage && (
-              <button
-                onClick={onNavigateToProductsPage}
-                className="px-4 py-2.5 rounded-full bg-cyan-700 hover:bg-cyan-800 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-2xs hover:shadow-xs cursor-pointer whitespace-nowrap"
-              >
-                <span>Full Page View</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </button>
-            )}
-
-            <button
-              onClick={scrollToNextSection}
-              className="px-4 py-2.5 rounded-full bg-white hover:bg-slate-100 text-[#0f2a44] text-xs font-bold border border-slate-200 flex items-center justify-center gap-1.5 transition shadow-2xs hover:shadow-xs cursor-pointer whitespace-nowrap"
-              title="Skip products and view 3D Interactive Lab & Company Sections"
-            >
-              <span>Skip to 3D Lab ↓</span>
-              <ArrowDown className="w-3.5 h-3.5 text-cyan-600" />
-            </button>
           </div>
         </div>
 
@@ -429,37 +401,8 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
               </button>
             </div>
 
-            {/* Quick jump to Next Home Section */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={scrollToNextSection}
-                className="px-4 py-2 rounded-xl bg-slate-200/80 hover:bg-slate-300 text-slate-800 text-xs font-bold flex items-center gap-1.5 transition cursor-pointer"
-                title="Don't want to browse products? View 3D Demo & Home Sections below"
-              >
-                <span>Scroll to Next Section ↓</span>
-              </button>
-            </div>
-
           </div>
         )}
-
-        {/* Informational Callout: Seamless Navigation */}
-        <div className="mt-10 bg-slate-100/80 rounded-2xl p-4 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-600">
-          <div className="flex items-center gap-2 text-center sm:text-left">
-            <Sparkles className="w-4 h-4 text-cyan-600 shrink-0 hidden sm:inline" />
-            <span>
-              <strong>Tip:</strong> Home page shows 6 instruments at a time for fast scrolling. Use <strong>Next Page</strong> above to browse all 79 items, or scroll down to explore our <strong>3D Demonstration Lab</strong> and <strong>Certifications</strong>.
-            </span>
-          </div>
-
-          <button
-            onClick={scrollToNextSection}
-            className="text-cyan-700 hover:text-cyan-900 font-bold flex items-center gap-1 whitespace-nowrap cursor-pointer shrink-0"
-          >
-            <span>Skip to 3D Demonstration</span>
-            <ArrowDown className="w-3.5 h-3.5" />
-          </button>
-        </div>
 
       </div>
     </section>

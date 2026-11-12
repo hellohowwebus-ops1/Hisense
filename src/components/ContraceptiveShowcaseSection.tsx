@@ -1,12 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { 
   ShieldCheck, 
   Sparkles, 
-  Play, 
-  Pause, 
-  Volume2, 
-  VolumeX, 
-  Maximize2, 
   CheckCircle2, 
   ArrowRight, 
   Plus, 
@@ -57,9 +52,6 @@ export const ContraceptiveShowcaseSection: React.FC<ContraceptiveShowcaseSection
   onNavigateProducts,
 }) => {
   const [selectedMethodId, setSelectedMethodId] = useState<string>('iud');
-  const [isPlaying, setIsPlaying] = useState<boolean>(true);
-  const [isMuted, setIsMuted] = useState<boolean>(true);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const contraceptiveProducts = PRODUCTS.filter((p) => p.category === 'contraceptive-range');
 
   const methods: ContraceptiveMethod[] = [
@@ -154,25 +146,6 @@ export const ContraceptiveShowcaseSection: React.FC<ContraceptiveShowcaseSection
   ];
 
   const selectedMethod = methods.find((m) => m.id === selectedMethodId) || methods[1];
-
-  const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-        setIsPlaying(false);
-      } else {
-        videoRef.current.play();
-        setIsPlaying(true);
-      }
-    }
-  };
-
-  const toggleMute = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
-  };
 
   // Render method icon with vibrant styling
   const renderMethodIcon = (type: string) => {
@@ -515,131 +488,8 @@ export const ContraceptiveShowcaseSection: React.FC<ContraceptiveShowcaseSection
           </div>
         </div>
 
-        {/* 3. MULTIMEDIA PHOTOGRAPHIC & VIDEO SHOWCASE (FEATURING NEW REAL ASSETS) */}
-        <div className="mb-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-            <div>
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-800">
-                CLINICAL PACKAGING &amp; STERILIZATION GALLERY
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-black text-[#0f2a44] tracking-tight">
-                Authentic Product Photography &amp; Video Inspection
-              </h3>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-mono bg-cyan-100 text-cyan-900 px-3 py-1 rounded-full font-bold">
-                Batch Traceable • CE Certified
-              </span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            {/* Real Product Image 1: Contraceptive Pack Suite */}
-            <div className="bg-slate-50 rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl hover:border-cyan-500 transition-all duration-300 group flex flex-col justify-between">
-              <div className="relative w-full h-64 overflow-hidden bg-white">
-                <img
-                  src="/assets/images/home/contraceptive_kit_pack.jpg"
-                  alt="Hisense Contraceptive Kit Pack with Copper T 380A and DMPA"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-3 left-3 bg-[#0f2a44]/90 backdrop-blur-md text-white text-[10px] font-mono font-bold px-2.5 py-1 rounded-full">
-                  Clinical Pack Suite
-                </div>
-              </div>
-              <div className="p-5">
-                <h4 className="text-base font-bold text-[#0f2a44] group-hover:text-cyan-700 transition">
-                  Sterile Blister Copper T 380A &amp; DMPA Vial
-                </h4>
-                <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                  High-barrier medical packaging featuring tamper-evident Tyvek seals, pre-loaded depth insertion tubes, and lot-specific batch codes.
-                </p>
-              </div>
-            </div>
-
-            {/* Real Product Image 2: Copper T Device Macro */}
-            <div className="bg-slate-50 rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl hover:border-cyan-500 transition-all duration-300 group flex flex-col justify-between">
-              <div className="relative w-full h-64 overflow-hidden bg-white">
-                <img
-                  src="/assets/images/home/copper_t_device_macro.jpg"
-                  alt="Hisense Copper T 380A Macro on Surgical Steel Tray"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-3 left-3 bg-cyan-700/90 backdrop-blur-md text-white text-[10px] font-mono font-bold px-2.5 py-1 rounded-full">
-                  Device Engineering
-                </div>
-              </div>
-              <div className="p-5">
-                <h4 className="text-base font-bold text-[#0f2a44] group-hover:text-cyan-700 transition">
-                  380 mm² Pure Electrolytic Copper Wire
-                </h4>
-                <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                  Precision winding on anatomical polyethylene T-stem with graduated centimetre depth flange and dual monofilament cervical retrieval threads.
-                </p>
-              </div>
-            </div>
-
-            {/* Embedded Live Video Player: 3d3.mp4 */}
-            <div className="bg-slate-950 rounded-3xl overflow-hidden border border-slate-200 shadow-xl flex flex-col justify-between relative group">
-              <div className="relative w-full h-64 overflow-hidden">
-                <video
-                  ref={videoRef}
-                  src="/assets/images/home/3d3.mp4"
-                  poster="/assets/images/home/contraceptive_kit_pack.jpg"
-                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-slate-950/90 via-transparent to-transparent pointer-events-none" />
-
-                {/* Top Badge */}
-                <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-                  <span className="px-2.5 py-1 rounded-full bg-cyan-500/90 text-slate-950 text-[10px] font-mono font-black uppercase">
-                    ● 4K MEDICAL DEMO
-                  </span>
-                  <button
-                    onClick={toggleMute}
-                    className="p-1.5 rounded-full bg-black/60 text-white hover:text-cyan-400 transition"
-                  >
-                    {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
-                  </button>
-                </div>
-
-                {/* Bottom Controls Overlay */}
-                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white">
-                  <button
-                    onClick={togglePlay}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/20 hover:bg-white/30 backdrop-blur-md text-xs font-bold"
-                  >
-                    {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-                    <span>{isPlaying ? 'Pause' : 'Play'}</span>
-                  </button>
-                  <button
-                    onClick={() => onOpenVideoModal('Hisense Contraceptive Manufacturing & Sterility Reel', 'Contraceptives')}
-                    className="p-1.5 rounded-xl bg-white/20 hover:bg-white/30 backdrop-blur-md"
-                  >
-                    <Maximize2 className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              </div>
-
-              <div className="p-5 text-white">
-                <h4 className="text-base font-bold text-cyan-300">
-                  Cleanroom Assembly &amp; Packaging Reel
-                </h4>
-                <p className="text-xs text-slate-300 mt-1.5 leading-relaxed">
-                  Automated blister sealing, gamma irradiation, and strict endotoxin testing conforming to ISO 13485 standards.
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        {/* 4. OFFICIAL CONTRACEPTIVE PRODUCT RANGE SHOWCASE (18 PRODUCTS) */}
-        <div className="mt-16 pt-12 border-t border-slate-200">
+        {/* 3. OFFICIAL CONTRACEPTIVE PRODUCT RANGE SHOWCASE (18 PRODUCTS) */}
+        <div className="mt-16 pt-12 border-t border-slate-200 mb-4">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
             <div>
               <div className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-[#e6007e] mb-2">
